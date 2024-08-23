@@ -1,13 +1,19 @@
 namespace EspacioCadeteria
 {
+    enum Estado{
+    Entregado,
+    Enviado,
+    Rechazado,
+    Pendiente
+  }
   public class Pedidos
   {
     private string Nro;
     private string Obs;
     private Cliente cliente;
-    private string Estado;
+    private Estado estado;
 
-    public Pedidos(string nro, string obs, string nombre_Cli, string direccion_Cli, string telefono_Cli, string datosRefDireccion_Cli, string estado)
+    public Pedidos(string nro, string obs, string nombre_Cli, string direccion_Cli, string telefono_Cli, string datosRefDireccion_Cli, Estado estado)
     {
         Nro1 = nro;
         Obs1 = obs;
@@ -18,7 +24,7 @@ namespace EspacioCadeteria
     public string Nro1 { get => Nro; set => Nro = value; }
     public string Obs1 { get => Obs; set => Obs = value; }
     public Cliente Cliente1 { get => cliente; set => cliente = value; }
-    public string Estado1 { get => Estado; set => Estado = value; }
+    public Estado Estado1 { get => estado; set => estado = value; }
 
     public void VerDireccionCliente()
     {
