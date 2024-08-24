@@ -31,16 +31,16 @@ namespace EspacioCadeteria
 
     public void VerDireccionCliente()
     {
-      Console.WriteLine($"La direccion del cliente es: {Cliente.Direccion1}");
+      Console.WriteLine($"La direccion del cliente es: {Cliente.Direccion}");
     }
 
     public void VerDatosCliente()
     {
       Console.WriteLine("Datos del cliente: ");
-      Console.WriteLine($"{Cliente.Nombre1}");
-      Console.WriteLine($"{Cliente.Direccion1}");
-      Console.WriteLine($"{Cliente.Telefono1}");
-      Console.WriteLine($"{Cliente.DatosReferenciaDireccion1}");
+      Console.WriteLine($"{Cliente.Nombre}");
+      Console.WriteLine($"{Cliente.Direccion}");
+      Console.WriteLine($"{Cliente.Telefono}");
+      Console.WriteLine($"{Cliente.DatosReferenciaDireccion}");
     }
   }
 }
