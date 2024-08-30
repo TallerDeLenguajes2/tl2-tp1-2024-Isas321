@@ -1,8 +1,4 @@
 ﻿using EspacioCadeteria;
-
-
-
-
 using System;
 using System.Collections.Generic;
 
@@ -10,8 +6,11 @@ class Program
 {
     static void Main(string[] args)
     {
-        List<Pedido> pedidos = new List<Pedido>();
+
         List<Cadete> cadetes = new List<Cadete>();
+        
+        Cadeteria cadeteria = new Cadeteria("El pollo loco", "381", cadetes);
+
 
         bool continuar = true;
 
@@ -31,22 +30,26 @@ class Program
             {
                 case "1":
                     Console.WriteLine("Dar de alta pedidos");
-                    
+                    cadeteria.DarDeAltaPedido(              
+                            "12345",                   // Número del pedido
+                            "Observaciones del pedido", // Observaciones
+                            "Juan Pérez",              // Nombre del cliente
+                            "Calle Falsa 123",         // Dirección del cliente
+                            "555-1234",                // Teléfono del cliente
+                            "Cerca de la plaza",       // Datos de referencia de la dirección del cliente
+                            Estado.Enviado );
                     break;
                 case "2":
                     Console.WriteLine("Asignar pedidos a cadetes");
-                    // Lógica para asignar pedidos a cadetes
-                    // Aquí puedes llamar a un método como `AsignarPedidoACadete()`
+
                     break;
                 case "3":
                     Console.WriteLine("Cambiar estado de un pedido");
-                    // Lógica para cambiar el estado de un pedido
-                    // Aquí puedes llamar a un método como `CambiarEstadoPedido()`
+
                     break;
                 case "4":
                     Console.WriteLine("Reasignar pedido a otro cadete");
-                    // Lógica para reasignar el pedido a otro cadete
-                    // Aquí puedes llamar a un método como `ReasignaPedidoAOtroCadete()`
+
                     break;
                 case "5":
                     continuar = false;
