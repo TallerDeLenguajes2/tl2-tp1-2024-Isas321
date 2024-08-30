@@ -30,7 +30,7 @@ class Program
             {
                 case "1":
                     Console.WriteLine("Dar de alta pedidos");
-                    cadeteria.DarDeAltaPedido(              
+                    Pedido pedido = cadeteria.DarDeAltaPedido(              
                             "12345",                   // Número del pedido
                             "Observaciones del pedido", // Observaciones
                             "Juan Pérez",              // Nombre del cliente
@@ -38,6 +38,8 @@ class Program
                             "555-1234",                // Teléfono del cliente
                             "Cerca de la plaza",       // Datos de referencia de la dirección del cliente
                             Estado.Enviado );
+
+
                     break;
                 case "2":
                     Console.WriteLine("Asignar pedidos a cadetes");

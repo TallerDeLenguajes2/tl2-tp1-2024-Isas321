@@ -51,6 +51,7 @@ namespace EspacioCadeteria
             return cadete.Pedidos1.Count * 500;
         }
 
+
     public Pedido cambioDeEstadoDePedido(Pedido pedido){
     bool continuar = true;
     do
