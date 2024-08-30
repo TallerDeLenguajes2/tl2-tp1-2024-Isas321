@@ -1,6 +1,6 @@
 namespace EspacioCadeteria
 {
-    enum Estado{
+    public enum Estado{
     Entregado,
     Enviado,
     Rechazado,
