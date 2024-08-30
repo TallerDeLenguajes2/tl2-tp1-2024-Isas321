@@ -19,9 +19,9 @@ namespace EspacioCadeteria
         public string Telefono1 { get => Telefono; set => Telefono = value; }
         public List<Cadete> Cadetes1 { get => Cadetes; set => Cadetes = value; }
 
-        public Pedidos DarDeAltaPedido(string nro, string obs, string nombre_Cli, string direccion_Cli, string telefono_Cli, string datosRefDireccion_Cli, Estado estado)
+        public Pedido DarDeAltaPedido(string nro, string obs, string nombre_Cli, string direccion_Cli, string telefono_Cli, string datosRefDireccion_Cli, Estado estado)
         {
-            Pedidos Pedido = new Pedidos(nro, obs, nombre_Cli, direccion_Cli, telefono_Cli, datosRefDireccion_Cli, estado);
+            Pedido Pedido = new Pedido(nro, obs, nombre_Cli, direccion_Cli, telefono_Cli, datosRefDireccion_Cli, estado);
             return Pedido;
         }
 
@@ -39,7 +39,7 @@ namespace EspacioCadeteria
             return cadeteConMenosPedidos;
         }
 
-        public Cadete AsignarPedidoCadete(Pedidos pedido)
+        public Cadete AsignarPedidoCadete(Pedido pedido)
         {
             Cadete cadete = CadeteConMenosPedidos(Cadetes1);
             cadete.Pedidos1.Add(pedido);
@@ -51,7 +51,7 @@ namespace EspacioCadeteria
             return cadete.Pedidos1.Count * 500;
         }
 
-    public Pedidos cambioDeEstadoDePedido(Pedidos pedido){
+    public Pedido cambioDeEstadoDePedido(Pedido pedido){
     bool continuar = true;
     do
     {
@@ -67,19 +67,19 @@ namespace EspacioCadeteria
         switch (opcion)
         {
             case 1:
-                pedido.Estado1 = Estado.Entregado;
+                pedido.EstadoPedido = Estado.Entregado;
                 Console.WriteLine("Estado cambiado a Entregado.");
                 break;
             case 2:
-                pedido.Estado1= Estado.Enviado;
+                pedido.EstadoPedido= Estado.Enviado;
                 Console.WriteLine("Estado cambiado a Enviado.");
                 break;
             case 3:
-                pedido.Estado1 = Estado.Rechazado;
+                pedido.EstadoPedido = Estado.Rechazado;
                 Console.WriteLine("Estado cambiado a Rechazado.");
                 break;
             case 4:
-                pedido.Estado1 = Estado.Pendiente;
+                pedido.EstadoPedido = Estado.Pendiente;
                 Console.WriteLine("Estado cambiado a Pendiente.");
                 break;
             case 5:
@@ -97,7 +97,7 @@ namespace EspacioCadeteria
           
         }
 
-  public List<Cadete> ReasignaPedidoAOtroCadete(Pedidos pedido, List<Cadete> cadetes)
+  public List<Cadete> ReasignaPedidoAOtroCadete(Pedido pedido, List<Cadete> cadetes)
   {
       Console.WriteLine("Seleccione el ID del cadete al que desea reasignar el pedido:");
 

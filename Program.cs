@@ -1,6 +1,6 @@
 ﻿using EspacioCadeteria;
 
-Pedidos nuevoPedido = new Pedidos(    
+Pedido nuevoPedido = new Pedido(    
     "12345",                   
     "Observaciones del pedido", 
     "Juan Pérez",              
