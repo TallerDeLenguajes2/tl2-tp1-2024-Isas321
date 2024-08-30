@@ -1,43 +1,46 @@
 namespace EspacioCadeteria
 {
-    public enum Estado{
+    public enum Estado{ //Lo pongo publico para que el constructor puede acceder a el. Consultar
     Entregado,
     Enviado,
     Rechazado,
     Pendiente
   }
-  public class Pedidos
+  public class Pedido
   {
-    private string Nro;
-    private string Obs;
+    //Recordar: las propiedades públicas deberían comenzar con mayúsculas y las privadas con minusculas
+    private string nro;
+    private string obs;
     private Cliente cliente;
     private Estado estado;
 
-    public Pedidos(string nro, string obs, string nombre_Cli, string direccion_Cli, string telefono_Cli, string datosRefDireccion_Cli, Estado estado)
+    public Pedido(string nro, string obs, string nombre_Cli, string direccion_Cli, string telefono_Cli, string datosRefDireccion_Cli, Estado estado)
     {
-        Nro1 = nro;
-        Obs1 = obs;
-        Cliente1 = new Cliente(nombre_Cli,direccion_Cli, telefono_Cli, datosRefDireccion_Cli);
-        Estado1 = estado;
+        //Lo hago asi para mantener las convenciones de minusculas
+        this.nro = nro;
+        this.obs = obs;
+        this.cliente = new Cliente(nombre_Cli,direccion_Cli, telefono_Cli, datosRefDireccion_Cli);
+        this.estado = estado;
     }
 
-    public string Nro1 { get => Nro; set => Nro = value; }
-    public string Obs1 { get => Obs; set => Obs = value; }
-    public Cliente Cliente1 { get => cliente; set => cliente = value; }
-    public Estado Estado1 { get => estado; set => estado = value; }
+    public string NumeroPedido { get => nro; set => nro = value; }
+    public string Observaciones { get => obs; set => obs = value; }
+    public Cliente Cliente { get => cliente; set => cliente = value; }
+    public Estado EstadoPedido { get => estado; set => estado = value; }
+
 
     public void VerDireccionCliente()
     {
-      Console.WriteLine($"La direccion del cliente es: {Cliente1.Direccion1}");
+      Console.WriteLine($"La direccion del cliente es: {Cliente.Direccion}");
     }
 
     public void VerDatosCliente()
     {
       Console.WriteLine("Datos del cliente: ");
-      Console.WriteLine($"{Cliente1.Nombre1}");
-      Console.WriteLine($"{Cliente1.Direccion1}");
-      Console.WriteLine($"{Cliente1.Telefono1}");
-      Console.WriteLine($"{Cliente1.DatosReferenciaDireccion1}");
+      Console.WriteLine($"{Cliente.Nombre}");
+      Console.WriteLine($"{Cliente.Direccion}");
+      Console.WriteLine($"{Cliente.Telefono}");
+      Console.WriteLine($"{Cliente.DatosReferenciaDireccion}");
     }
   }
 }
