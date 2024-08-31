@@ -23,6 +23,17 @@ namespace EspacioCadeteria
     public string Direccion { get => direccion; set => direccion = value; }
     public string Telefono { get => telefono; set => telefono = value; }
     public List<Pedido> Pedidos { get => pedidos; set => pedidos = value; }
+
+    public void MostrarCadete(){
+      System.Console.WriteLine("\nId: "+Id);
+      System.Console.WriteLine("Nombre: "+Nombre);
+      System.Console.WriteLine("Direccion: "+Direccion);
+      System.Console.WriteLine("Telefono: "+Telefono);
+      foreach (var pedido in Pedidos)
+      {
+          pedido.MostrarPedido();
+      }
+    }
   
     public double JornalACobrar(){
       int contador=0;
