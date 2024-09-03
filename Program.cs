@@ -11,26 +11,30 @@ class Program
         
         Cadeteria cadeteria = new Cadeteria("El pollo loco", "381", cadetes);
 
+        Pedido pedido = null;
+        
 
         bool continuar = true;
 
         while (continuar)
         {
-            Console.WriteLine("Sistema de Gestión de Pedidos");
-            Console.WriteLine("Seleccione una opción:");
+            Console.WriteLine("\n\n=== Sistema de Gestión de Pedidos ===");
             Console.WriteLine("1. Dar de alta pedidos");
             Console.WriteLine("2. Asignar pedidos a cadetes");
             Console.WriteLine("3. Cambiar estado de un pedido");
             Console.WriteLine("4. Reasignar pedido a otro cadete");
-            Console.WriteLine("5. Salir");
+            Console.WriteLine("5. Dar de alta cadete");
+            Console.WriteLine("6. Salir");
+            Console.Write("Seleccione una opción: ");
 
             string opcion = Console.ReadLine();
 
             switch (opcion)
             {
                 case "1":
+                //a) dar de alta pedidos
                     Console.WriteLine("Dar de alta pedidos");
-                    Pedido pedido = cadeteria.DarDeAltaPedido(              
+                    pedido = cadeteria.DarDeAltaPedido(              
                             "12345",                   // Número del pedido
                             "Observaciones del pedido", // Observaciones
                             "Juan Pérez",              // Nombre del cliente
@@ -39,14 +43,30 @@ class Program
                             "Cerca de la plaza",       // Datos de referencia de la dirección del cliente
                             Estado.Enviado );
 
-
+                            pedido.VerDatosCliente();
+                            
                     break;
                 case "2":
-                    Console.WriteLine("Asignar pedidos a cadetes");
+                //b) asignarlos a cadetes
+                    Console.WriteLine("\nAsignar pedidos a cadetes");
+                    if(cadetes.Count!=0){
+                        if(pedido!=null){
+                            cadeteria.AsignarPedidoCadete(pedido, cadetes);
+                        } else{
+                            System.Console.WriteLine("No hay pedidos");
+                        }
+                    } else{
+                        System.Console.WriteLine("\nNo hay cadetes disponibles");
+                    }
 
                     break;
                 case "3":
                     Console.WriteLine("Cambiar estado de un pedido");
+                    if(pedido!=null){
+                        pedido = cadeteria.cambioDeEstadoDePedido(pedido);
+                    } else{
+                        System.Console.WriteLine("No hay pedido");
+                    }
 
                     break;
                 case "4":
@@ -54,6 +74,15 @@ class Program
 
                     break;
                 case "5":
+                    Console.WriteLine("Dar de alta a un cadete");
+                    cadetes.Add(cadeteria.DarDeAltaCadete());
+
+                    foreach (var cadete in cadetes)
+                    {
+                        cadete.MostrarCadete();
+                    }
+                    break;
+                case "6":
                     continuar = false;
                     Console.WriteLine("Saliendo del sistema de gestión de pedidos.");
                     break;
