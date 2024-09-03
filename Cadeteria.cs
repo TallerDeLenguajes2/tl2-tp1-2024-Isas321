@@ -27,10 +27,10 @@ namespace EspacioCadeteria
 
         public Cadete CadeteConMenosPedidos(List<Cadete> Cadetes1)
         {
-            Cadete cadeteConMenosPedidos = Cadetes1.MinBy(cadete => cadete.Pedidos1.Count);
+            Cadete cadeteConMenosPedidos = Cadetes.MinBy(cadete => cadete.Pedidos.Count);
             if (cadeteConMenosPedidos != null)
             {
-                Console.WriteLine($"El cadete con menos pedidos es {cadeteConMenosPedidos.Nombre1} con {cadeteConMenosPedidos.Pedidos1.Count} pedidos.");
+                Console.WriteLine($"El cadete con menos pedidos es {cadeteConMenosPedidos.Nombre} con {cadeteConMenosPedidos.Pedidos.Count} pedidos.");
             }
             else
             {
@@ -38,17 +38,33 @@ namespace EspacioCadeteria
             }
             return cadeteConMenosPedidos;
         }
-
-        public Cadete AsignarPedidoCadete(Pedido pedido)
+        
+        public Cadete AsignarPedidoCadete(Pedido pedido, List<Cadete> cadetes)
         {
-            Cadete cadete = CadeteConMenosPedidos(Cadetes1);
-            cadete.Pedidos1.Add(pedido);
+            Cadete cadete = CadeteConMenosPedidos(cadetes);
+            cadete.Pedidos.Add(pedido);
+            return cadete;
+        }
+        
+        public Cadete DarDeAltaCadete(){
+            Console.Write("ID: ");
+            string id = Console.ReadLine(); 
+            Console.Write("Nombre: ");
+            string nombre = Console.ReadLine();
+            Console.Write("Direccion: ");
+            string direccion = Console.ReadLine();
+            Console.Write("Telefono: ");
+            string telefono = Console.ReadLine();
+            List<Pedido> pedidos  = new List<Pedido>();
+            Cadete cadete = new Cadete(id, nombre, direccion, telefono, pedidos);
             return cadete;
         }
 
+
+
         public double PagoDeCadete(Cadete cadete)
         {
-            return cadete.Pedidos1.Count * 500;
+            return cadete.Pedidos.Count * 500;
         }
 
 
@@ -56,12 +72,12 @@ namespace EspacioCadeteria
     bool continuar = true;
     do
     {
-        Console.WriteLine("Seleccione el nuevo estado del pedido:");
         Console.WriteLine("1. Entregado");
         Console.WriteLine("2. Enviado");
         Console.WriteLine("3. Rechazado");
         Console.WriteLine("4. Pendiente");
         Console.WriteLine("5. Salir");
+        Console.Write("Seleccione el nuevo estado del pedido: ");
 
         int opcion = Convert.ToInt32(Console.ReadLine());
 
@@ -98,39 +114,39 @@ namespace EspacioCadeteria
           
         }
 
-  public List<Cadete> ReasignaPedidoAOtroCadete(Pedido pedido, List<Cadete> cadetes)
-  {
-      Console.WriteLine("Seleccione el ID del cadete al que desea reasignar el pedido:");
+//   public List<Cadete> ReasignaPedidoAOtroCadete(Pedido pedido, List<Cadete> cadetes)
+//   {
+//       Console.WriteLine("Seleccione el ID del cadete al que desea reasignar el pedido:");
 
-      foreach (var cadete in cadetes)
-      {
-          Console.WriteLine($"ID: {cadete.Id1}, Nombre: {cadete.Nombre1}");
-      }
+//       foreach (var cadete in cadetes)
+//       {
+//           Console.WriteLine($"ID: {cadete.Id}, Nombre: {cadete.Nombre}");
+//       }
 
-      string idSeleccionado = Console.ReadLine();
+//       string idSeleccionado = Console.ReadLine();
 
-          var cadeteSeleccionado = cadetes.FirstOrDefault(c => c.Id1 == idSeleccionado);
-          if (cadeteSeleccionado != null)
-          {
-              foreach (var cadete in cadetes)
-              {
-                  if (cadete.Pedidos1.Contains(pedido))
-                  {
-                      cadete.Pedidos1.Remove(pedido);
-                      break;
-                  }
-              }
+//           var cadeteSeleccionado = cadetes.FirstOrDefault(c => c.Id == idSeleccionado);
+//           if (cadeteSeleccionado != null)
+//           {
+//               foreach (var cadete in cadetes)
+//               {
+//                   if (cadete.Pedidos.Contains(pedido))
+//                   {
+//                       cadete.Pedidos.Remove(pedido);
+//                       break;
+//                   }
+//               }
 
-              // Asignar el pedido al nuevo cadete
-              cadeteSeleccionado.Pedidos1.Add(pedido);
-              Console.WriteLine($"El pedido ha sido reasignado a {cadeteSeleccionado.Nombre1}.");
-          }
-          else
-          {
-              Console.WriteLine("Cadete no encontrado. Intente nuevamente.");
-          }
-      return cadetes;
-    }
+//               // Asignar el pedido al nuevo cadete
+//               cadeteSeleccionado.Pedidos1.Add(pedido);
+//               Console.WriteLine($"El pedido ha sido reasignado a {cadeteSeleccionado.Nombre}.");
+//           }
+//           else
+//           {
+//               Console.WriteLine("Cadete no encontrado. Intente nuevamente.");
+//           }
+//       return cadetes;
+//     }
 
   }
 }
