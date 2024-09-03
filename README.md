@@ -10,6 +10,18 @@ independientes entre si.
 
 ## ¿Qué métodos considera que debería tener la clase Cadetería y la clase Cadete?
 
+Metodos para Cadeteria:
+Dar de alta pedido
+Obtener el cadete con menos pedido para asignarle un pedido
+Asignar pedido a cadete
+Reasignar pedido de un cadete a otro
+Cambiar estado de pedido
+Eliminar pedido y que con esto tambien elimine al cliente
+
+Metodos para Cadete:
+Mostrar lista de pedidos
+Jornal a cobrar
+
 ## Teniendo en cuenta los principios de abstracción y ocultamiento, que atributos, propiedades y métodos deberían ser públicos y cuáles privados.
 
 ## ¿Cómo diseñaría los constructores de cada una de las clases?
