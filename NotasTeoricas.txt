@@ -1,0 +1,269 @@
+
+
+#   ***  COMPOSICION  ***
+
+Composición es un concepto fundamental en la programación orientada a objetos (OOP) que describe una relación fuerte entre dos clases. En esta relación, una clase (la clase "contenedora" o "compuesta") contiene referencias a instancias de otra clase (la clase "componente"). La vida del objeto componente está completamente controlada por el objeto contenedor, lo que significa que si el contenedor se elimina, el componente también se elimina. Esta relación se expresa a menudo como una relación "tiene un" (has-a).
+
+Características Principales de la Composición
+Relación de Contención Fuerte:
+
+La composición implica que una clase contiene instancias de otra clase como parte de su estado interno.
+El objeto componente no puede existir independientemente del objeto contenedor. Si el objeto contenedor se destruye, los objetos componentes también se destruyen.
+Ciclo de Vida Compartido:
+
+En una relación de composición, el ciclo de vida del objeto componente está completamente vinculado al ciclo de vida del objeto contenedor.
+Por ejemplo, si una clase Casa tiene una relación de composición con la clase Habitacion, cuando una instancia de Casa se elimina, todas las instancias de Habitacion que contiene también se eliminan.
+Dependencia Fuerte:
+
+El objeto componente depende completamente del objeto contenedor. Esto significa que la existencia del objeto componente no tiene sentido fuera del contexto del objeto contenedor.
+Propiedad:
+
+La composición indica una "propiedad" fuerte. El objeto contenedor "posee" los objetos componentes y es responsable de su creación y destrucción.
+Ejemplos de Composición
+Ejemplo 1: Casa y Habitaciones
+Imaginemos una relación entre una clase Casa y una clase Habitacion. Una Casa puede contener múltiples Habitaciones, y las Habitaciones no tienen sentido sin la Casa que las contiene.
+
+csharp
+Copiar código
+public class Habitacion
+{
+    public string Tipo { get; set; }
+
+    public Habitacion(string tipo)
+    {
+        Tipo = tipo;
+    }
+}
+
+public class Casa
+{
+    public List<Habitacion> Habitaciones { get; set; }
+
+    public Casa()
+    {
+        Habitaciones = new List<Habitacion>();
+    }
+
+    public void AgregarHabitacion(string tipo)
+    {
+        Habitacion nuevaHabitacion = new Habitacion(tipo);
+        Habitaciones.Add(nuevaHabitacion);
+    }
+
+    public void EliminarHabitacion(Habitacion habitacion)
+    {
+        Habitaciones.Remove(habitacion);
+    }
+}
+
+// Uso de la composición
+Casa casa = new Casa();
+casa.AgregarHabitacion("Cocina");
+casa.AgregarHabitacion("Baño");
+En este ejemplo:
+
+Casa contiene instancias de Habitacion.
+Si una instancia de Casa se destruye, también se destruyen las instancias de Habitacion contenidas en ella.
+Ejemplo 2: Pedido y Cliente
+Considerando un sistema de pedidos, una relación de composición podría darse entre Pedido y Producto si asumimos que un Producto existe solamente en el contexto de un Pedido.
+
+csharp
+Copiar código
+public class Producto
+{
+    public string Nombre { get; set; }
+    public double Precio { get; set; }
+
+    public Producto(string nombre, double precio)
+    {
+        Nombre = nombre;
+        Precio = precio;
+    }
+}
+
+public class Pedido
+{
+    public List<Producto> Productos { get; set; }
+
+    public Pedido()
+    {
+        Productos = new List<Producto>();
+    }
+
+    public void AgregarProducto(string nombre, double precio)
+    {
+        Producto producto = new Producto(nombre, precio);
+        Productos.Add(producto);
+    }
+
+    public void EliminarProducto(Producto producto)
+    {
+        Productos.Remove(producto);
+    }
+}
+En este caso:
+
+Pedido contiene instancias de Producto.
+Si se elimina un Pedido, se eliminan todos los Productos asociados.
+Beneficios de la Composición
+Modularidad:
+
+Facilita el diseño modular al permitir la construcción de objetos complejos a partir de otros objetos más simples.
+Flexibilidad y Reusabilidad:
+
+Los componentes pueden ser reutilizados en diferentes contextos dentro del objeto contenedor, lo que mejora la flexibilidad y la reutilización del código.
+Encapsulamiento:
+
+Permite un mayor encapsulamiento al ocultar la implementación de los objetos componentes dentro del objeto contenedor.
+Mantenimiento Simplificado:
+
+Facilita el mantenimiento del código, ya que los cambios en un componente no afectan necesariamente a otros componentes o al objeto contenedor.
+Diferencias entre Composición y Agregación
+Aunque ambas son relaciones de asociación entre objetos, hay diferencias clave:
+
+Composición:
+
+Ciclo de vida dependiente: Los componentes no existen sin el contenedor.
+Relación más fuerte y más estrecha.
+Agregación:
+
+Ciclo de vida independiente: Los componentes pueden existir sin el contenedor.
+Relación más débil y más flexible.
+Resumen
+La composición es una relación de contención fuerte entre objetos en la programación orientada a objetos. Se utiliza para construir objetos complejos a partir de objetos más simples, asegurando que los componentes sean destruidos cuando su contenedor se destruye. Esto proporciona una forma clara y estructurada de gestionar dependencias y relaciones entre objetos en un sistema, promoviendo la modularidad y el encapsulamiento.
+
+
+
+
+#   ***  Agregacion  ***
+
+Agregación es un concepto en programación orientada a objetos (OOP) que describe una relación débil entre dos clases. A diferencia de la composición, donde una clase "posee" completamente a otra, la agregación representa una relación de "parte-todo" más flexible. En esta relación, una clase (la clase "contenedora" o "agregadora") contiene referencias a instancias de otra clase (la clase "componente"), pero los objetos componentes pueden existir independientemente del objeto contenedor.
+
+Características Principales de la Agregación
+Relación de Contención Débil:
+
+La agregación implica que una clase contiene referencias a instancias de otra clase, pero los objetos componentes pueden existir por sí mismos, independientemente del objeto contenedor.
+Ciclo de Vida Independiente:
+
+En una relación de agregación, el ciclo de vida del objeto componente es independiente del ciclo de vida del objeto contenedor.
+Si el objeto contenedor se elimina, los objetos componentes pueden seguir existiendo.
+Menor Dependencia:
+
+Los objetos componentes en una relación de agregación no dependen completamente del objeto contenedor para su existencia.
+Por ejemplo, un Estudiante puede existir independientemente de una Clase, aunque la Clase tenga una referencia al Estudiante.
+Relación Más Flexible:
+
+La agregación permite una mayor flexibilidad y reusabilidad de los componentes porque pueden existir y ser utilizados en diferentes contextos.
+Ejemplos de Agregación
+Ejemplo 1: Clase y Estudiantes
+Consideremos un ejemplo donde una clase Clase contiene una lista de objetos Estudiante. Aquí, Clase tiene una relación de agregación con Estudiante porque un Estudiante puede existir sin estar asociado a una Clase específica.
+
+csharp
+Copiar código
+public class Estudiante
+{
+    public string Nombre { get; set; }
+    public int Edad { get; set; }
+
+    public Estudiante(string nombre, int edad)
+    {
+        Nombre = nombre;
+        Edad = edad;
+    }
+}
+
+public class Clase
+{
+    public string NombreClase { get; set; }
+    public List<Estudiante> Estudiantes { get; set; }
+
+    public Clase(string nombreClase)
+    {
+        NombreClase = nombreClase;
+        Estudiantes = new List<Estudiante>();
+    }
+
+    public void AgregarEstudiante(Estudiante estudiante)
+    {
+        Estudiantes.Add(estudiante);
+    }
+
+    public void EliminarEstudiante(Estudiante estudiante)
+    {
+        Estudiantes.Remove(estudiante);
+    }
+}
+En este ejemplo:
+
+Clase tiene una lista de Estudiante.
+Los Estudiantes pueden existir independientemente de la Clase. Pueden estar en múltiples clases o existir sin estar en ninguna clase.
+Ejemplo 2: Biblioteca y Libros
+Consideremos una relación entre una Biblioteca y Libro. Un Libro puede existir fuera de una Biblioteca (por ejemplo, en la casa de alguien), pero una Biblioteca puede tener una colección de Libros.
+
+csharp
+Copiar código
+public class Libro
+{
+    public string Titulo { get; set; }
+    public string Autor { get; set; }
+
+    public Libro(string titulo, string autor)
+    {
+        Titulo = titulo;
+        Autor = autor;
+    }
+}
+
+public class Biblioteca
+{
+    public string Nombre { get; set; }
+    public List<Libro> Libros { get; set; }
+
+    public Biblioteca(string nombre)
+    {
+        Nombre = nombre;
+        Libros = new List<Libro>();
+    }
+
+    public void AgregarLibro(Libro libro)
+    {
+        Libros.Add(libro);
+    }
+
+    public void EliminarLibro(Libro libro)
+    {
+        Libros.Remove(libro);
+    }
+}
+En este caso:
+
+Biblioteca contiene una lista de Libros.
+Los Libros pueden existir fuera del contexto de la Biblioteca.
+Beneficios de la Agregación
+Reutilización de Objetos:
+
+La agregación permite reutilizar objetos en diferentes contextos. Un objeto componente puede ser parte de múltiples objetos contenedores sin restricciones.
+Flexibilidad y Mantenimiento:
+
+Al tener objetos independientes, la agregación facilita el mantenimiento del código, ya que los cambios en el objeto componente no requieren necesariamente cambios en el objeto contenedor.
+Desacoplamiento:
+
+La agregación promueve el desacoplamiento, ya que los objetos componentes no están directamente controlados o poseídos por los objetos contenedores.
+Modularidad:
+
+Permite construir sistemas modulares donde los componentes pueden ser cambiados o reemplazados sin afectar la estructura general del sistema.
+Diferencias entre Composición y Agregación
+Aunque ambas son relaciones de asociación entre objetos, tienen diferencias clave:
+
+Composición:
+
+Relación fuerte donde el objeto componente depende completamente del objeto contenedor.
+El ciclo de vida del componente está atado al ciclo de vida del contenedor.
+Ejemplo: Habitacion es parte de una Casa.
+Agregación:
+
+Relación débil donde el objeto componente puede existir independientemente del objeto contenedor.
+Los componentes tienen un ciclo de vida independiente.
+Ejemplo: Estudiante puede existir independientemente de una Clase.
+Resumen
+La agregación es una relación de contención débil que permite una mayor flexibilidad y reutilización de objetos en la programación orientada a objetos. Los objetos componentes en una relación de agregación pueden existir de forma independiente del objeto contenedor, lo que permite un mayor desacoplamiento y modularidad en el diseño de software. Esta relación es útil cuando necesitas que los objetos sean reutilizables y menos dependientes unos de otros, facilitando así el mantenimiento y la extensión del código.
