@@ -11,6 +11,7 @@ independientes entre si.
 ## ¿Qué métodos considera que debería tener la clase Cadetería y la clase Cadete?
 
 Metodos para Cadeteria:
+Mostrar cadeteria
 Dar de alta pedido
 Obtener el cadete con menos pedido para asignarle un pedido
 Asignar pedido a cadete
@@ -19,6 +20,7 @@ Cambiar estado de pedido
 Eliminar pedido y que con esto tambien elimine al cliente
 
 Metodos para Cadete:
+Mostrar cadete
 Mostrar lista de pedidos
 Jornal a cobrar
 
