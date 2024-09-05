@@ -4,20 +4,20 @@ namespace EspacioCadeteria
 {
     public class Cadeteria
     {
-        private string Nombre;
-        private string Telefono;
-        private List<Cadete> Cadetes;
+        private string nombre;
+        private string telefono;
+        private List<Cadete> cadetes;
 
         public Cadeteria(string nombre, string telefono, List<Cadete> Cadetes)
         {
-            Nombre1 = nombre;
-            Telefono1 = telefono;
-            Cadetes1 = Cadetes;
+            this.nombre = nombre;
+            this.telefono = telefono;
+            this.cadetes = Cadetes;
         }
 
-        public string Nombre1 { get => Nombre; set => Nombre = value; }
-        public string Telefono1 { get => Telefono; set => Telefono = value; }
-        public List<Cadete> Cadetes1 { get => Cadetes; set => Cadetes = value; }
+        public string Nombre { get => nombre; set => nombre = value; }
+        public string Telefono { get => telefono; set => telefono = value; }
+        public List<Cadete> Cadetes { get => cadetes; set => cadetes = value; }
 
         public Pedido DarDeAltaPedido(string nro, string obs, string nombre_Cli, string direccion_Cli, string telefono_Cli, string datosRefDireccion_Cli, Estado estado)
         {
@@ -25,7 +25,7 @@ namespace EspacioCadeteria
             return Pedido;
         }
 
-        public Cadete CadeteConMenosPedidos(List<Cadete> Cadetes1)
+        public Cadete CadeteConMenosPedidos(List<Cadete> Cadetes)
         {
             Cadete cadeteConMenosPedidos = Cadetes.MinBy(cadete => cadete.Pedidos.Count);
             if (cadeteConMenosPedidos != null)
@@ -41,24 +41,12 @@ namespace EspacioCadeteria
         
         public Cadete AsignarPedidoCadete(Pedido pedido, List<Cadete> cadetes)
         {
+            pedido.EstadoPedido = Estado.Enviado;
             Cadete cadete = CadeteConMenosPedidos(cadetes);
             cadete.Pedidos.Add(pedido);
             return cadete;
         }
         
-        public Cadete DarDeAltaCadete(){
-            Console.Write("ID: ");
-            string id = Console.ReadLine(); 
-            Console.Write("Nombre: ");
-            string nombre = Console.ReadLine();
-            Console.Write("Direccion: ");
-            string direccion = Console.ReadLine();
-            Console.Write("Telefono: ");
-            string telefono = Console.ReadLine();
-            List<Pedido> pedidos  = new List<Pedido>();
-            Cadete cadete = new Cadete(id, nombre, direccion, telefono, pedidos);
-            return cadete;
-        }
 
 
 
@@ -67,17 +55,28 @@ namespace EspacioCadeteria
             return cadete.Pedidos.Count * 500;
         }
 
+        public void MostrarCadeteria(){
+            System.Console.WriteLine("\n\nDatos de cadeteria:");
+            System.Console.WriteLine("Nombre: "+Nombre);
+            System.Console.WriteLine("Telefono: "+telefono);
+            System.Console.WriteLine("Lista de cadetes: ");
+            foreach (var cadete in cadetes)
+            {
+                cadete.MostrarCadete();
+            }
+        }
 
     public Pedido cambioDeEstadoDePedido(Pedido pedido){
     bool continuar = true;
     do
-    {
+    {   
+        System.Console.WriteLine("\nEstado actual del pedido?");
         Console.WriteLine("1. Entregado");
         Console.WriteLine("2. Enviado");
         Console.WriteLine("3. Rechazado");
         Console.WriteLine("4. Pendiente");
         Console.WriteLine("5. Salir");
-        Console.Write("Seleccione el nuevo estado del pedido: ");
+        Console.Write("Seleccione estado: ");
 
         int opcion = Convert.ToInt32(Console.ReadLine());
 
