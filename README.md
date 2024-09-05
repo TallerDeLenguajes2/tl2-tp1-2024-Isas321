@@ -6,7 +6,7 @@ Las relaciones de Pedidos y Clientes tienen una relacion fuerte, que se realiza 
 que no existe un pedido, si se elimina un pedido se elimina el cliente.
 
 Las relaciones de Cadeteria y Cadete son relaciones debiles que se realizan por agregacion, la existencia de cadete y cadeteria son
-independientes entre si.
+independientes entre si. cadete con pedido agra
 
 ## ¿Qué métodos considera que debería tener la clase Cadetería y la clase Cadete?
 

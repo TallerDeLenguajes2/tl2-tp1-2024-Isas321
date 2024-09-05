@@ -7,13 +7,15 @@ class Program
     static void Main(string[] args)
     {
 
-        List<Cadete> cadetes = new List<Cadete>();
-        
-        Cadeteria cadeteria = new Cadeteria("El pollo loco", "381", cadetes);
+        List<Cadete> cadetes = ManejadorDeCsv.CargaDeCadetes("Cadetes.csv");
+        Cadeteria cadeteria = ManejadorDeCsv.CargaDeCadeteria("Cadeteria.csv", cadetes);
+
+        cadeteria.MostrarCadeteria();
+
+
 
         Pedido pedido = null;
         
-
         bool continuar = true;
 
         while (continuar)
@@ -41,7 +43,7 @@ class Program
                             "Calle Falsa 123",         // Dirección del cliente
                             "555-1234",                // Teléfono del cliente
                             "Cerca de la plaza",       // Datos de referencia de la dirección del cliente
-                            Estado.Enviado );
+                            Estado.Pendiente );
 
                             pedido.VerDatosCliente();
                             
@@ -75,12 +77,7 @@ class Program
                     break;
                 case "5":
                     Console.WriteLine("Dar de alta a un cadete");
-                    cadetes.Add(cadeteria.DarDeAltaCadete());
 
-                    foreach (var cadete in cadetes)
-                    {
-                        cadete.MostrarCadete();
-                    }
                     break;
                 case "6":
                     continuar = false;
@@ -91,5 +88,7 @@ class Program
                     break;
             }
         }
+
+
     }
 }
