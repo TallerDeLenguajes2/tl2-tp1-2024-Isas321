@@ -25,10 +25,10 @@ namespace EspacioCadeteria
     public List<Pedido> Pedidos { get => pedidos; set => pedidos = value; }
 
     public void MostrarCadete(){
-      System.Console.WriteLine("\nId: "+Id);
-      System.Console.WriteLine("Nombre: "+Nombre);
-      System.Console.WriteLine("Direccion: "+Direccion);
-      System.Console.WriteLine("Telefono: "+Telefono);
+      System.Console.WriteLine("\n\tId: "+Id);
+      System.Console.WriteLine("\tNombre: "+Nombre);
+      System.Console.WriteLine("\tDireccion: "+Direccion);
+      System.Console.WriteLine("\tTelefono: "+Telefono);
       foreach (var pedido in Pedidos)
       {
           pedido.MostrarPedido();
