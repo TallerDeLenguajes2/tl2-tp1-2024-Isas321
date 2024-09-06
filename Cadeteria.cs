@@ -75,7 +75,6 @@ namespace EspacioCadeteria
         Console.WriteLine("2. Enviado");
         Console.WriteLine("3. Rechazado");
         Console.WriteLine("4. Pendiente");
-        Console.WriteLine("5. Salir");
         Console.Write("Seleccione estado: ");
 
         int opcion = Convert.ToInt32(Console.ReadLine());
@@ -98,12 +97,9 @@ namespace EspacioCadeteria
                 pedido.EstadoPedido = Estado.Pendiente;
                 Console.WriteLine("Estado cambiado a Pendiente.");
                 break;
-            case 5:
-                continuar = false;
-                Console.WriteLine("Saliendo del cambio de estado.");
-                break;
             default:
-                Console.WriteLine("Opción inválida. Por favor, intente de nuevo.");
+                Console.WriteLine("Opcion invalida. No se cambio el estado del pedido");
+                continuar = false;
                 break;
         }
 
