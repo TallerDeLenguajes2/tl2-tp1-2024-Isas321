@@ -1,6 +1,7 @@
 ﻿using EspacioCadeteria;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 
 class Program
 {
@@ -9,12 +10,9 @@ class Program
 
         List<Cadete> cadetes = ManejadorDeCsv.CargaDeCadetes("Cadetes.csv");
         Cadeteria cadeteria = ManejadorDeCsv.CargaDeCadeteria("Cadeteria.csv", cadetes);
+        List <Pedido> pedidos = new List<Pedido>();
 
         cadeteria.MostrarCadeteria();
-
-
-
-        Pedido pedido = null;
         
         bool continuar = true;
 
@@ -25,7 +23,7 @@ class Program
             Console.WriteLine("2. Asignar pedidos a cadetes");
             Console.WriteLine("3. Cambiar estado de un pedido");
             Console.WriteLine("4. Reasignar pedido a otro cadete");
-            Console.WriteLine("5. Dar de alta cadete");
+            Console.WriteLine("5. Mostrar pedidos pendientes");
             Console.WriteLine("6. Salir");
             Console.Write("Seleccione una opción: ");
 
@@ -34,40 +32,67 @@ class Program
             switch (opcion)
             {
                 case "1":
-                //a) dar de alta pedidos
                     Console.WriteLine("Dar de alta pedidos");
-                    pedido = cadeteria.DarDeAltaPedido(              
-                            "12345",                   // Número del pedido
-                            "Observaciones del pedido", // Observaciones
-                            "Juan Pérez",              // Nombre del cliente
-                            "Calle Falsa 123",         // Dirección del cliente
-                            "555-1234",                // Teléfono del cliente
-                            "Cerca de la plaza",       // Datos de referencia de la dirección del cliente
+
+                    System.Console.WriteLine("Ingrese numero de pedido: ");
+                    string numeroPedido = Console.ReadLine();
+
+                    System.Console.WriteLine("Nombre del cliente: ");
+                    string nombre = Console.ReadLine();
+
+                   var pedido = cadeteria.DarDeAltaPedido(              
+                            numeroPedido,                   
+                            "Observaciones del pedido", 
+                            nombre,              
+                            "Calle Prueba",         
+                            "555-1234",                
+                            "Cerca de la plaza",       
                             Estado.Pendiente );
 
-                            pedido.VerDatosCliente();
-                            
+                            pedidos.Add(pedido);            
                     break;
                 case "2":
-                //b) asignarlos a cadetes
                     Console.WriteLine("\nAsignar pedidos a cadetes");
-                    if(cadetes.Count!=0){
-                        if(pedido!=null){
-                            cadeteria.AsignarPedidoCadete(pedido, cadetes);
-                        } else{
-                            System.Console.WriteLine("No hay pedidos");
+                    Pedido pedidoBuscado = BuscarPedidoPorNumero(pedidos);
+                    if (cadetes.Count != 0)
+                    {
+                        if (pedidoBuscado != null)
+                        {
+                            Cadete cadete = cadeteria.AsignarPedidoCadete(pedidoBuscado, cadetes);
+                            System.Console.WriteLine("El pedido fue asignado al cadete: " + cadete.Nombre);
                         }
-                    } else{
-                        System.Console.WriteLine("\nNo hay cadetes disponibles");
+                        else
+                        {
+                            System.Console.WriteLine("No se encontro el pedido.");
+                        }
                     }
-
+                    else
+                    {
+                        System.Console.WriteLine("\nNo hay cadetes disponibles.");
+                    }
                     break;
                 case "3":
                     Console.WriteLine("Cambiar estado de un pedido");
-                    if(pedido!=null){
-                        pedido = cadeteria.cambioDeEstadoDePedido(pedido);
-                    } else{
-                        System.Console.WriteLine("No hay pedido");
+
+                    Pedido pedidoParaActualizar = null;
+
+                    foreach (var cadete in cadetes)
+                    {
+                        pedidoParaActualizar = BuscarPedidoPorNumero(cadete.Pedidos);
+
+                        if (pedidoParaActualizar != null)
+                        {
+                            break;
+                        }
+                    }
+
+                    if (pedidoParaActualizar != null)
+                    {
+                        pedidoParaActualizar = cadeteria.cambioDeEstadoDePedido(pedidoParaActualizar);
+                    }
+                    else
+                    {
+                        Console.WriteLine("No hay pedido");
                     }
 
                     break;
@@ -76,8 +101,11 @@ class Program
 
                     break;
                 case "5":
-                    Console.WriteLine("Dar de alta a un cadete");
-
+                    Console.WriteLine("Mostrar pedidos pendientes");
+                    foreach (var pedidoPendiente in pedidos)
+                    {
+                        pedidoPendiente.MostrarPedido();
+                    }
                     break;
                 case "6":
                     continuar = false;
@@ -89,6 +117,12 @@ class Program
             }
         }
 
-
+        static Pedido BuscarPedidoPorNumero(List<Pedido> pedidos)
+        {
+            System.Console.Write("\nIngrese numero de pedido: ");
+            string numPedido = Console.ReadLine();
+            var pedidoBuscado = pedidos.Find(pedido => pedido.NumeroPedido == numPedido);
+            return pedidoBuscado;
+        }
     }
 }
