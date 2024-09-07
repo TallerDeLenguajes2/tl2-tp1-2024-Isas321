@@ -35,12 +35,12 @@ class Program
             switch (opcion)
             {
                 case "1":
-                    Console.WriteLine("Dar de alta pedidos");
+                    Console.WriteLine("\nDar de alta pedidos");
 
-                    System.Console.WriteLine("Ingrese numero de pedido: ");
+                    System.Console.Write("Ingrese numero de pedido: ");
                     string numeroPedido = Console.ReadLine();
 
-                    System.Console.WriteLine("Nombre del cliente: ");
+                    System.Console.Write("Nombre del cliente: ");
                     string nombre = Console.ReadLine();
 
                    var pedido = cadeteria.DarDeAltaPedido(              
@@ -136,27 +136,33 @@ class Program
                     break;
                 case "5":
                     Console.WriteLine("Mostrar pedidos pendientes");
-                    foreach (var pedidoPendiente in pedidosPendientes)
+                    if(pedidosPendientes.Count!=0)
                     {
-                        pedidoPendiente.MostrarPedido();
+                        MostrarPedidos(pedidosPendientes);
                     }
+                    else
+                    {
+                        System.Console.WriteLine("\nNo hay pedidos pendientes.");
+                    }
+
                     break;
                 case "6":
                     Console.WriteLine("\nMostrar Todos los pedidos");
-                    System.Console.WriteLine("\nPedidos pendientes");
-                    foreach (var pedidoPendiente in pedidosPendientes)
+                    if(pedidosPendientes.Count!=0)
                     {
-                        pedidoPendiente.MostrarPedido();
+                        System.Console.WriteLine("\nPedidos pendientes: ");
+                        MostrarPedidos(pedidosPendientes);
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("\nNo hay pedidos pendientes.");
                     }
                     System.Console.WriteLine("\nPedidos asignados a cadetes");
                     foreach (var cadete in cadetes)
                     {
                         if(cadete.Pedidos.Count!=0){
                             System.Console.WriteLine($"\nNombre de cadete: {cadete.Nombre}");
-                            foreach (var pedidoCad in cadete.Pedidos)
-                            {
-                                pedidoCad.MostrarPedido();
-                            }
+                            MostrarPedidos(cadete.Pedidos);
                         }
                     }
                     break;
@@ -174,6 +180,14 @@ class Program
         {
             var pedidoBuscado = pedidos.Find(pedido => pedido.NumeroPedido == numPedido);
             return pedidoBuscado;
+        }
+
+        static void MostrarPedidos(List<Pedido> pedidosPendientes)
+        {
+            foreach (var pedidoPendiente in pedidosPendientes)
+            {
+                pedidoPendiente.MostrarPedido();
+            }
         }
     }
 }
