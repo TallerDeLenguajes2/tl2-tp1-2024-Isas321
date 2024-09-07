@@ -66,7 +66,7 @@ namespace EspacioCadeteria
             }
         }
 
-    public Pedido cambioDeEstadoDePedido(Pedido pedido){
+    public void cambioDeEstadoDePedido(Pedido pedido){
     bool continuar = true;
     do
     {   
@@ -75,6 +75,7 @@ namespace EspacioCadeteria
         Console.WriteLine("2. Enviado");
         Console.WriteLine("3. Rechazado");
         Console.WriteLine("4. Pendiente");
+        Console.WriteLine("5. Salir");
         Console.Write("Seleccione estado: ");
 
         int opcion = Convert.ToInt32(Console.ReadLine());
@@ -84,28 +85,35 @@ namespace EspacioCadeteria
             case 1:
                 pedido.EstadoPedido = Estado.Entregado;
                 Console.WriteLine("Estado cambiado a Entregado.");
+                continuar = false;
                 break;
             case 2:
                 pedido.EstadoPedido= Estado.Enviado;
                 Console.WriteLine("Estado cambiado a Enviado.");
+                continuar = false;
                 break;
             case 3:
                 pedido.EstadoPedido = Estado.Rechazado;
                 Console.WriteLine("Estado cambiado a Rechazado.");
+                continuar = false;
                 break;
             case 4:
                 pedido.EstadoPedido = Estado.Pendiente;
                 Console.WriteLine("Estado cambiado a Pendiente.");
+                continuar = false;
+                break;
+            case 5:
+                System.Console.WriteLine("No se cambio el estado del pedido.");
+                continuar = false;
                 break;
             default:
-                Console.WriteLine("Opcion invalida. No se cambio el estado del pedido");
-                continuar = false;
+                Console.WriteLine("Opcion invalida.");
                 break;
         }
 
     } while (continuar);
 
-    return pedido;
+    // return pedido;
           
         }
 
