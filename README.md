@@ -6,7 +6,9 @@ Las relaciones de Pedidos y Clientes tienen una relacion fuerte, que se realiza 
 que no existe un pedido, si se elimina un pedido se elimina el cliente.
 
 Las relaciones de Cadeteria y Cadete son relaciones debiles que se realizan por agregacion, la existencia de cadete y cadeteria son
-independientes entre si. cadete con pedido agra
+independientes entre si.
+
+La relacion entre Cadete y Pedido es debil, la existencia de ellas es independiente una de otra, se realiza por agregacion.
 
 ## ¿Qué métodos considera que debería tener la clase Cadetería y la clase Cadete?
 
@@ -17,7 +19,6 @@ Obtener el cadete con menos pedido para asignarle un pedido
 Asignar pedido a cadete
 Reasignar pedido de un cadete a otro
 Cambiar estado de pedido
-Eliminar pedido y que con esto tambien elimine al cliente
 
 Metodos para Cadete:
 Mostrar cadete
@@ -25,6 +26,9 @@ Mostrar lista de pedidos
 Jornal a cobrar
 
 ## Teniendo en cuenta los principios de abstracción y ocultamiento, que atributos, propiedades y métodos deberían ser públicos y cuáles privados.
+
+Datos de cliente, cadete y pedidos privados
+Datos de cadeteria publicos
 
 ## ¿Cómo diseñaría los constructores de cada una de las clases?
 
