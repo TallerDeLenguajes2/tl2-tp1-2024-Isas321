@@ -35,14 +35,24 @@ namespace EspacioCadeteria
       }
     }
   
-    public double JornalACobrar(){
-      int contador=0;
-      double pagoPorPedido = 500;
+    public double JornalACobrar()
+    {
+        double pagoPorPedido = 500;
+        return ContadorPedidosEntregados() * pagoPorPedido;
+    }
+
+    public int ContadorPedidosEntregados()
+    {
+      int contador = 0;
       foreach (var pedido in Pedidos)
       {
-        contador++;
+          if (pedido.EstadoPedido == Estado.Entregado)
+          {
+              contador++;
+          }
       }
-      return contador*pagoPorPedido;
+
+      return contador;
     }
   }
 }
