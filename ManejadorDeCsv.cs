@@ -27,9 +27,8 @@ namespace EspacioCadeteria
                                 string nombre = campos[1];
                                 string direccion = campos[2];
                                 string telefono = campos[3];
-                                List<Pedido> pedidos = new List<Pedido>();
 
-                                Cadete cadete = new Cadete(id, nombre, direccion, telefono, pedidos);
+                                Cadete cadete = new Cadete(id, nombre, direccion, telefono);
                                 cadetes.Add(cadete);
                             }
                         }
@@ -73,7 +72,7 @@ namespace EspacioCadeteria
                             {
                                 string nombre = campos[0];
                                 string telefono = campos[1];
-                                Cadeteria cadeteria = new Cadeteria(nombre, telefono, cadetes);
+                                Cadeteria cadeteria = new Cadeteria(nombre, telefono, cadetes, new List<Pedido>());
                                 Console.WriteLine("Carga exitosa de cadeteria.");
                                 return cadeteria;
                             }
@@ -103,6 +102,14 @@ namespace EspacioCadeteria
         public static bool ExisteArchivo(string ruta)
         {
             return File.Exists(ruta);
+        }
+
+        public static Cadeteria CreacionDeCadeteria(){
+            string rutaCadete = "Cadetes.csv";
+            string rutaCadeteria = "Cadeteria.csv";
+            List<Cadete> cadetes = CargaDeCadetes(rutaCadete);
+            Cadeteria cadeteria = CargaDeCadeteria(rutaCadeteria, cadetes);
+            return cadeteria;
         }
     }
 }
