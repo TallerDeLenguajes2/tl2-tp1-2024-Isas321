@@ -110,7 +110,6 @@ class Program
                     break;
                 case "4":
                     Console.WriteLine("Reasignar pedido a otro cadete");
-
                     System.Console.Write("\nIngrese numero de pedido: ");
                     numPedido = Console.ReadLine();
                     System.Console.Write("\nIngrese ID del cadete que tomara el pedido: ");
@@ -126,10 +125,8 @@ class Program
                             cad.Pedidos.Remove(pedidoParaReasignar);
                             reasignado = true;
                         }
-                        if(reasignado) 
-                            System.Console.WriteLine("\nReasignacion de pedido con exito."); 
-                        else 
-                            System.Console.WriteLine("\nNo se encontro un pedido con ese numero");
+                        if(reasignado) System.Console.WriteLine("\nReasignacion de pedido con exito."); 
+                        else System.Console.WriteLine("\nNo se encontro un pedido con ese numero");
                     } else{
                         System.Console.WriteLine("\nNo se encontro cadete con ese ID.");
                     }
