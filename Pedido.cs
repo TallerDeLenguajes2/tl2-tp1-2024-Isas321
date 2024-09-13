@@ -23,9 +23,9 @@ namespace EspacioCadeteria
         this.estado = estado;
     }
 
-    public string NumeroPedido { get => nro; set => nro = value; }
-    public string Observaciones { get => obs; set => obs = value; }
-    public Cliente Cliente { get => cliente; set => cliente = value; }
+    public string NumeroPedido { get => nro; }
+    public string Observaciones { get => obs; }
+    public Cliente Cliente { get => cliente; }
     public Estado EstadoPedido { get => estado; set => estado = value; }
 
     public void MostrarPedido(){

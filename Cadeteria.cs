@@ -15,9 +15,9 @@ namespace EspacioCadeteria
             this.cadetes = Cadetes;
         }
 
-        public string Nombre { get => nombre; set => nombre = value; }
-        public string Telefono { get => telefono; set => telefono = value; }
-        public List<Cadete> Cadetes { get => cadetes; set => cadetes = value; }
+        public string Nombre { get => nombre; }
+        public string Telefono { get => telefono; }
+        public List<Cadete> Cadetes { get => cadetes; }
 
         public Pedido DarDeAltaPedido(string nro, string obs, string nombre_Cli, string direccion_Cli, string telefono_Cli, string datosRefDireccion_Cli, Estado estado)
         {

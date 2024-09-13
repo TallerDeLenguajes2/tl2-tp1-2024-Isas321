@@ -18,11 +18,11 @@ namespace EspacioCadeteria
         this.pedidos = pedidos;
     }
 
-    public string Id { get => id; set => id = value; }
-    public string Nombre { get => nombre; set => nombre = value; }
-    public string Direccion { get => direccion; set => direccion = value; }
-    public string Telefono { get => telefono; set => telefono = value; }
-    public List<Pedido> Pedidos { get => pedidos; set => pedidos = value; }
+    public string Id { get => id; }
+    public string Nombre { get => nombre; }
+    public string Direccion { get => direccion; }
+    public string Telefono { get => telefono; }
+    public List<Pedido> Pedidos { get => pedidos; }
 
     public void MostrarCadete(){
       System.Console.WriteLine("\n\tId: "+Id);
