@@ -53,6 +53,12 @@ namespace EspacioCadeteria
             }
         }
 
+        public double promedio(int sumaTotal, int cantElementos){
+            return (double)sumaTotal/cantElementos;
+        }
+
+        
+
         public Cadete BuscarCadetePorId(string Id){
             Cadete cadete = cadetes.Find(cadete => cadete.Id == Id);
 
