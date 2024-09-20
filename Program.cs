@@ -91,60 +91,35 @@ class Program
 
                     break;
                 case "4":
-                    // Console.WriteLine("Reasignar pedido a otro cadete");
-                    // System.Console.Write("\nIngrese numero de pedido: ");
-                    // numPedido = Console.ReadLine();
-                    // System.Console.Write("\nIngrese ID del cadete que tomara el pedido: ");
-                    // string idCadete = Console.ReadLine();
-                    // Pedido pedidoParaReasignar = null;
-                    // Cadete cadeteDesignado = cadetes.Find(cadete => idCadete == cadete.Id);
-                    // bool reasignado = false;
-                    // if(cadeteDesignado!= null){
-                    //     foreach (var cad in cadetes)
-                    //     {
-                    //         pedidoParaReasignar = cad.Pedidos.Find(pedido => numPedido == pedido.NumeroPedido);
-                    //         cadeteDesignado.Pedidos.Add(pedidoParaReasignar);
-                    //         cad.Pedidos.Remove(pedidoParaReasignar);
-                    //         reasignado = true;
-                    //     }
-                    //     if(reasignado) System.Console.WriteLine("\nReasignacion de pedido con exito."); 
-                    //     else System.Console.WriteLine("\nNo se encontro un pedido con ese numero");
-                    // } else{
-                    //     System.Console.WriteLine("\nNo se encontro cadete con ese ID.");
-                    // }
+                    Console.WriteLine("Reasignar pedido a otro cadete");
+                    System.Console.Write("\nIngrese numero de pedido: ");
+                    numPedido = Console.ReadLine();
+
+                    Pedido pedidoParaReasignar = cadeteria.BuscarPedidoPorNumero(numPedido);
+
+                    if(pedidoParaReasignar==null){
+                        System.Console.WriteLine("Pedido no encontrado");
+                        break;
+                    }
+
+                    Console.Write("\nIngrese id del cadete que se hara cargo: ");
+                    string idCadeteNuevo = Console.ReadLine();
+                    Cadete cadeteNuevo = cadeteria.BuscarCadetePorId(idCadeteNuevo);
+                    if(cadeteNuevo == null){
+                        System.Console.WriteLine("ID de cadete no encontrado");
+                        break;
+                     }
+
+                    cadeteria.ReasignarPedidoAOtroCadete(pedidoParaReasignar, cadeteNuevo);
         
                     break;
                 case "5":
-                    // Console.WriteLine("Mostrar pedidos pendientes");
-                    // if(pedidosPendientes.Count!=0)
-                    // {
-                    //     MostrarPedidos(pedidosPendientes);
-                    // }
-                    // else
-                    // {
-                    //     System.Console.WriteLine("\nNo hay pedidos pendientes.");
-                    // }
-
+                    Console.WriteLine("Mostrar pedidos pendientes");
+                    cadeteria.MostrarTodosLosPedidos(cadeteria.TraerPedidosPorEstado(Estado.Pendiente));
                     break;
                 case "6":
-                    // Console.WriteLine("\nMostrar Todos los pedidos");
-                    // if(pedidosPendientes.Count!=0)
-                    // {
-                    //     System.Console.WriteLine("\nPedidos pendientes: ");
-                    //     MostrarPedidos(pedidosPendientes);
-                    // }
-                    // else
-                    // {
-                    //     System.Console.WriteLine("\nNo hay pedidos pendientes.");
-                    // }
-                    // System.Console.WriteLine("\nPedidos asignados a cadetes");
-                    // foreach (var cadete in cadetes)
-                    // {
-                    //     if(cadete.Pedidos.Count!=0){
-                    //         System.Console.WriteLine($"\nNombre de cadete: {cadete.Nombre}");
-                    //         MostrarPedidos(cadete.Pedidos);
-                    //     }
-                    // }
+                    Console.WriteLine("\nMostrar Todos los pedidos");
+                    cadeteria.MostrarTodosLosPedidos(cadeteria.Pedidos);
                     break;
                 case "7":
                     // Console.WriteLine("Cantidad promedio de envios por cadete.");
