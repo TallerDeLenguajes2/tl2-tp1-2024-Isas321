@@ -32,12 +32,22 @@ namespace EspacioCadeteria
             pedidos.Add(pedido);
         }
 
-        public void MostrarPedidos(List<Pedido> pedidosPendientes)
+        public void MostrarTodosLosPedidos(List<Pedido> pedidos)
         {
-            foreach (var pedidoPendiente in pedidosPendientes)
+            foreach (var pedido in pedidos)
             {
-                pedidoPendiente.MostrarPedido();
+                pedido.MostrarPedido();
             }
+        }
+
+        public List<Pedido> TraerPedidosPorEstado(Estado estado){
+            List<Pedido> pedidosConEseEstado = new List<Pedido>();
+            pedidosConEseEstado = pedidos.FindAll(pedido => pedido.EstadoPedido == estado);
+            return pedidosConEseEstado;
+        }
+
+        public void MostrarBuscarPorEstado(){
+
         }
 
         public Cadete BuscarCadetePorId(string Id){
@@ -158,39 +168,6 @@ namespace EspacioCadeteria
     }
 
 
-//   public List<Cadete> ReasignaPedidoAOtroCadete(Pedido pedido, List<Cadete> cadetes)
-//   {
-//       Console.WriteLine("Seleccione el ID del cadete al que desea reasignar el pedido:");
-
-//       foreach (var cadete in cadetes)
-//       {
-//           Console.WriteLine($"ID: {cadete.Id}, Nombre: {cadete.Nombre}");
-//       }
-
-//       string idSeleccionado = Console.ReadLine();
-
-//           var cadeteSeleccionado = cadetes.FirstOrDefault(c => c.Id == idSeleccionado);
-//           if (cadeteSeleccionado != null)
-//           {
-//               foreach (var cadete in cadetes)
-//               {
-//                   if (cadete.Pedidos.Contains(pedido))
-//                   {
-//                       cadete.Pedidos.Remove(pedido);
-//                       break;
-//                   }
-//               }
-
-//               // Asignar el pedido al nuevo cadete
-//               cadeteSeleccionado.Pedidos1.Add(pedido);
-//               Console.WriteLine($"El pedido ha sido reasignado a {cadeteSeleccionado.Nombre}.");
-//           }
-//           else
-//           {
-//               Console.WriteLine("Cadete no encontrado. Intente nuevamente.");
-//           }
-//       return cadetes;
-//     }
 
   }
 }
