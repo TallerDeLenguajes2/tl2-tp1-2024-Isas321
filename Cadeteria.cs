@@ -41,7 +41,10 @@ namespace EspacioCadeteria
         }
 
         public Cadete BuscarCadetePorId(string Id){
-            return cadetes.Find(cadete => cadete.Id == Id);
+            Cadete cadete = cadetes.Find(cadete => cadete.Id == Id);
+
+            if(cadete!=null) return cadete;
+            else return null;
         }
 
         public int CantidadDePedidosQueEntregoCadete(string idCadete){
@@ -49,7 +52,9 @@ namespace EspacioCadeteria
         }
 
         public Pedido BuscarPedidoPorNumero(string num){
-            return pedidos.Find(pedido => pedido.NumeroPedido == num);
+            Pedido pedido = pedidos.Find(pedido => pedido.NumeroPedido == num);
+            if(pedido!=null) return pedido;
+            else return null;
         }
 
         public double JornalACobrar(string idCadete)
@@ -58,9 +63,17 @@ namespace EspacioCadeteria
             return pagoPorPedido * CantidadDePedidosQueEntregoCadete(idCadete);
         }
 
-        public void AsignarCadeteAPedido(string idCadete, string numPedido){
+        public Pedido AsignarCadeteAPedido(string idCadete, string numPedido){
+            Cadete cadete = null;
             Pedido pedido = BuscarPedidoPorNumero(numPedido);
-            pedido.Cadete = BuscarCadetePorId(idCadete);
+            if(pedido != null) 
+            {
+                cadete = BuscarCadetePorId(idCadete);
+                if(cadete != null) pedido.Cadete = cadete;
+                else return null;
+            }
+            else return null;
+            return pedido;
         }
         
         // public Cadete CadeteConMenosPedidos(List<Cadete> Cadetes)
@@ -77,22 +90,8 @@ namespace EspacioCadeteria
         //     return cadeteConMenosPedidos;
         // }
         
-        // public Cadete AsignarPedidoCadete(Pedido pedido, List<Cadete> cadetes)
-        // {
-        //     pedido.EstadoPedido = Estado.Enviado;
-        //     Cadete cadete = CadeteConMenosPedidos(cadetes);
-        //     cadete.Pedidos.Add(pedido);
-        //     return cadete;
-        // }
-        
 
-
-
-        // public double PagoDeCadete(Cadete cadete)
-        // {
-        //     return cadete.Pedidos.Count * 500;
-        // }
-
+    
         public void MostrarCadeteria(){
             System.Console.WriteLine("\n\nDatos de cadeteria:");
             System.Console.WriteLine("Nombre: "+Nombre);
@@ -104,56 +103,53 @@ namespace EspacioCadeteria
             }
         }
 
-    // public void cambioDeEstadoDePedido(Pedido pedido){
-    // bool continuar = true;
-    // do
-    // {   
-    //     System.Console.WriteLine("\nEstado actual del pedido?");
-    //     Console.WriteLine("1. Entregado");
-    //     Console.WriteLine("2. Enviado");
-    //     Console.WriteLine("3. Rechazado");
-    //     Console.WriteLine("4. Pendiente");
-    //     Console.WriteLine("5. Salir");
-    //     Console.Write("Seleccione estado: ");
+        public void CambioDeEstadoDePedido(Pedido pedido, Estado nuevoEstado)
+        {
+            pedido.EstadoPedido = nuevoEstado;
+        }
 
-    //     int opcion = Convert.ToInt32(Console.ReadLine());
+        public void MenuCambioDeEstadoDePedido(Pedido pedido){
+        bool continuar = true;
+        do
+        {   
+            System.Console.WriteLine("\nEstado actual del pedido?");
+            Console.WriteLine("1. Entregado");
+            Console.WriteLine("2. Enviado");
+            Console.WriteLine("3. Rechazado");
+            Console.WriteLine("4. Pendiente");
+            Console.WriteLine("5. Salir");
+            Console.Write("Seleccione estado: ");
 
-    //     switch (opcion)
-    //     {
-    //         case 1:
-    //             pedido.EstadoPedido = Estado.Entregado;
-    //             Console.WriteLine("Estado cambiado a Entregado.");
-    //             continuar = false;
-    //             break;
-    //         case 2:
-    //             pedido.EstadoPedido= Estado.Enviado;
-    //             Console.WriteLine("Estado cambiado a Enviado.");
-    //             continuar = false;
-    //             break;
-    //         case 3:
-    //             pedido.EstadoPedido = Estado.Rechazado;
-    //             Console.WriteLine("Estado cambiado a Rechazado.");
-    //             continuar = false;
-    //             break;
-    //         case 4:
-    //             pedido.EstadoPedido = Estado.Pendiente;
-    //             Console.WriteLine("Estado cambiado a Pendiente.");
-    //             continuar = false;
-    //             break;
-    //         case 5:
-    //             System.Console.WriteLine("No se cambio el estado del pedido.");
-    //             continuar = false;
-    //             break;
-    //         default:
-    //             Console.WriteLine("Opcion invalida.");
-    //             break;
-    //     }
+            int opcion = Convert.ToInt32(Console.ReadLine());
 
-    // } while (continuar);
-
-    // // return pedido;
-          
-    //     }
+            switch (opcion)
+            {
+                case 1:
+                    CambioDeEstadoDePedido(pedido, Estado.Entregado);
+                    continuar = false;
+                    break;
+                case 2:
+                    CambioDeEstadoDePedido(pedido, Estado.Enviado);
+                    continuar = false;
+                    break;
+                case 3:
+                    CambioDeEstadoDePedido(pedido, Estado.Rechazado);
+                    continuar = false;
+                    break;
+                case 4:
+                    CambioDeEstadoDePedido(pedido, Estado.Pendiente);
+                    continuar = false;
+                    break;
+                case 5:
+                    System.Console.WriteLine("No se cambio el estado del pedido.");
+                    continuar = false;
+                    break;
+                default:
+                    Console.WriteLine("Opcion invalida.");
+                    break;
+            }
+        } while (continuar);          
+    }
 
 //   public List<Cadete> ReasignaPedidoAOtroCadete(Pedido pedido, List<Cadete> cadetes)
 //   {
