@@ -28,7 +28,7 @@ namespace EspacioCadeteria
             return Pedido;
         }
 
-        public void CargarPedidoAListaDePedidos(List<Pedido> pedidos, Pedido pedido){
+        public void CargarPedidoAListaDePedidos(Pedido pedido){
             pedidos.Add(pedido);
         }
 
@@ -40,20 +40,29 @@ namespace EspacioCadeteria
             }
         }
 
-        public Cadete BuscarCadetePorId(List<Cadete> cadetes, string Id){
+        public Cadete BuscarCadetePorId(string Id){
             return cadetes.Find(cadete => cadete.Id == Id);
         }
 
-        public Pedido BuscarPedidoPorNumero(List<Pedido> pedidos, string num){
+        public int CantidadDePedidosQueEntregoCadete(string idCadete){
+            return pedidos.Count(pedido => pedido.Cadete.Id==idCadete);
+        }
+
+        public Pedido BuscarPedidoPorNumero(string num){
             return pedidos.Find(pedido => pedido.NumeroPedido == num);
         }
 
-        // public double JornalACobrar()
-        // {
-        //     double pagoPorPedido = 500;
-        //     return ContadorPedidosEntregados() * pagoPorPedido;
-        // }
+        public double JornalACobrar(string idCadete)
+        {
+            double pagoPorPedido = 500;
+            return pagoPorPedido * CantidadDePedidosQueEntregoCadete(idCadete);
+        }
 
+        public void AsignarCadeteAPedido(string idCadete, string numPedido){
+            Pedido pedido = BuscarPedidoPorNumero(numPedido);
+            pedido.Cadete = BuscarCadetePorId(idCadete);
+        }
+        
         // public Cadete CadeteConMenosPedidos(List<Cadete> Cadetes)
         // {
         //     Cadete cadeteConMenosPedidos = Cadetes.MinBy(cadete => cadete.Pedidos.Count);
