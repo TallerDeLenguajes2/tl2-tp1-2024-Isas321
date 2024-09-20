@@ -60,9 +60,19 @@ class Program
 
                     System.Console.Write("\nIngrese numero de pedido: ");
                     numPedido = Console.ReadLine();
+                    pedido = cadeteria.BuscarPedidoPorNumero(numPedido);
+                    if(pedido == null) {
+                        System.Console.WriteLine("Numero de pedido incorrecto");
+                        break;
+                    }
                     System.Console.Write("\nIngrese id del cadete que se hara cargo: ");
                     string idCadete = Console.ReadLine();
-                    cadeteria.AsignarCadeteAPedido(idCadete, numPedido);
+                    Cadete cadete = cadeteria.BuscarCadetePorId(idCadete);
+                    if(cadete == null){
+                        System.Console.WriteLine("ID de cadete no encontrado");
+                        break;
+                     }
+                    cadeteria.AsignarCadeteAPedido(cadete, pedido);
                     break;
                 case "3":
                     Console.WriteLine("Cambiar estado de un pedido");
