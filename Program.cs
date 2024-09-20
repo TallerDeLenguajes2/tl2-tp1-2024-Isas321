@@ -38,7 +38,7 @@ class Program
 
                     System.Console.Write("Ingrese numero de pedido: ");
                     string numeroPedido = Console.ReadLine();
-
+                    
                     System.Console.Write("Nombre del cliente: ");
                     string nombre = Console.ReadLine();
 
@@ -65,10 +65,19 @@ class Program
                     cadeteria.AsignarCadeteAPedido(idCadete, numPedido);
                     break;
                 case "3":
-                    // Console.WriteLine("Cambiar estado de un pedido");
+                    Console.WriteLine("Cambiar estado de un pedido");
 
-                    // System.Console.Write("\nIngrese numero de pedido: ");
-                    // numPedido = Console.ReadLine();
+                    System.Console.Write("\nIngrese numero de pedido: ");
+                    numPedido = Console.ReadLine();
+
+                    Pedido pedidoBuscado = cadeteria.BuscarPedidoPorNumero(numPedido);
+
+                    if(pedidoBuscado==null){
+                        System.Console.WriteLine("Pedido no encontrado");
+                        break;
+                    }
+
+
                     // Pedido pedidoParaCambiarEstado = null;
                     // bool encontrado = false;
 
