@@ -56,6 +56,7 @@ class Program
                     cadeteria.CargarPedidoAListaDePedidos(pedido);      
 
                     break;
+
                 case "2":
                     Console.WriteLine("\nAsignar pedidos a cadetes");
 
@@ -75,6 +76,7 @@ class Program
                      }
                     cadeteria.AsignarCadeteAPedido(cadete, pedido);
                     break;
+
                 case "3":
                     Console.WriteLine("Cambiar estado de un pedido");
 
@@ -91,6 +93,7 @@ class Program
                     cadeteria.MenuCambioDeEstadoDePedido(pedidoBuscado);
 
                     break;
+
                 case "4":
                     Console.WriteLine("Reasignar pedido a otro cadete");
                     System.Console.Write("\nIngrese numero de pedido: ");
@@ -114,30 +117,35 @@ class Program
                     cadeteria.ReasignarPedidoAOtroCadete(pedidoParaReasignar, cadeteNuevo);
         
                     break;
+
                 case "5":
                     Console.WriteLine("Mostrar pedidos pendientes");
                     cadeteria.MostrarTodosLosPedidos(cadeteria.TraerPedidosPorEstado(Estado.Pendiente));
                     break;
+
                 case "6":
                     Console.WriteLine("\nMostrar Todos los pedidos");
                     cadeteria.MostrarTodosLosPedidos(cadeteria.Pedidos);
                     break;
+
                 case "7":
                     System.Console.WriteLine("\nTodos los cadetes");
                     cadeteria.MostrarTodosLosCadetes();
                     break;
+
                 case "8":
                     Console.WriteLine("Cantidad promedio de envios por cadete.");
                     int cantPedidosEntregados = cadeteria.TraerPedidosPorEstado(Estado.Entregado).Count;
                     int cantidadCadetes =  cadeteria.Cadetes.Count;
                     double promedio = cadeteria.promedio(cantPedidosEntregados, cantidadCadetes);
                     Console.WriteLine($"Promedio de pedidos entregados: {promedio}");
-
                     break;
+
                 case "9":
                     continuar = false;
                     Console.WriteLine("Saliendo del sistema de gestión de pedidos.");
                     break;
+
                 default:
                     Console.WriteLine("Opción no válida. Por favor, seleccione una opción del 1 al 5.");
                     break;
