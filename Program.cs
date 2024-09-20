@@ -127,20 +127,11 @@ class Program
                     cadeteria.MostrarTodosLosCadetes();
                     break;
                 case "8":
-                    // Console.WriteLine("Cantidad promedio de envios por cadete.");
-                    // int cantidadCadetes = cadetes.Count;
-                    // int pedidosEntregados = 0, promedio = 0;
-                    // foreach (var cadete in cadetes)
-                    // {
-                    //     int pedidosEntregadoPorCadete = cadete.ContadorPedidosEntregados();
-                    //     if(pedidosEntregadoPorCadete > 0){
-                    //         System.Console.WriteLine($"Cadete {cadete.Nombre} entrego: {pedidosEntregadoPorCadete} pedidos");
-                    //         System.Console.WriteLine($"Le corresponde cobrar {cadete.JornalACobrar()}");
-                    //     }
-                    //     pedidosEntregados += pedidosEntregadoPorCadete;
-                    // }
-                    // promedio = pedidosEntregados / cantidadCadetes;
-                    // System.Console.WriteLine($"Promedio de pedidos entregados: {promedio}");
+                    Console.WriteLine("Cantidad promedio de envios por cadete.");
+                    int cantPedidosEntregados = cadeteria.TraerPedidosPorEstado(Estado.Entregado).Count;
+                    int cantidadCadetes =  cadeteria.Cadetes.Count;
+                    double promedio = cadeteria.promedio(cantPedidosEntregados, cantidadCadetes);
+                    Console.WriteLine($"Promedio de pedidos entregados: {promedio}");
 
                     break;
                 case "9":
