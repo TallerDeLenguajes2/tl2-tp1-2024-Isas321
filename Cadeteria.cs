@@ -76,6 +76,13 @@ namespace EspacioCadeteria
             return pedido;
         }
         
+        public Pedido BuscarPedidoPorEstado(List <Pedido> pedido, Estado estado){
+            Pedido pedidoBuscado = pedidos.Find(pedido => pedido.EstadoPedido == estado);
+            if(pedidoBuscado != null ) return pedidoBuscado;
+            else return null;
+        }
+
+        
         // public Cadete CadeteConMenosPedidos(List<Cadete> Cadetes)
         // {
         //     Cadete cadeteConMenosPedidos = Cadetes.MinBy(cadete => cadete.Pedidos.Count);
