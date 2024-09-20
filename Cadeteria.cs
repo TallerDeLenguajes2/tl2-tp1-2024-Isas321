@@ -46,8 +46,11 @@ namespace EspacioCadeteria
             return pedidosConEseEstado;
         }
 
-        public void MostrarBuscarPorEstado(){
-
+        public void MostrarTodosLosCadetes(){
+            foreach (var cadete in cadetes)
+            {
+                cadete.MostrarCadete();
+            }
         }
 
         public Cadete BuscarCadetePorId(string Id){
