@@ -29,7 +29,7 @@ namespace EspacioCadeteria
     public string Observaciones { get => obs; }
     public Cliente Cliente { get => cliente; }
     public Estado EstadoPedido { get => estado; set => estado = value; }
-    public Cadete Cadete {get => cadete;}
+    public Cadete Cadete {get => cadete; set => cadete = value; }
 
     public void MostrarPedido(){
       System.Console.WriteLine("\nDatos del pedido: ");
