@@ -25,8 +25,9 @@ class Program
             Console.WriteLine("4. Reasignar pedido a otro cadete");
             Console.WriteLine("5. Mostrar pedidos pendientes");
             Console.WriteLine("6. Mostrar todos los pedidos");
-            Console.WriteLine("7. Mostrar informe de pedidos");
-            Console.WriteLine("8. Salir");
+            Console.WriteLine("7. Mostrar todos los cadetes");
+            Console.WriteLine("8. Mostrar informe de pedidos");
+            Console.WriteLine("9. Salir");
             Console.Write("Seleccione una opción: ");
 
             string opcion = Console.ReadLine();
@@ -122,6 +123,10 @@ class Program
                     cadeteria.MostrarTodosLosPedidos(cadeteria.Pedidos);
                     break;
                 case "7":
+                    System.Console.WriteLine("\nTodos los cadetes");
+                    cadeteria.MostrarTodosLosCadetes();
+                    break;
+                case "8":
                     // Console.WriteLine("Cantidad promedio de envios por cadete.");
                     // int cantidadCadetes = cadetes.Count;
                     // int pedidosEntregados = 0, promedio = 0;
@@ -138,7 +143,7 @@ class Program
                     // System.Console.WriteLine($"Promedio de pedidos entregados: {promedio}");
 
                     break;
-                case "8":
+                case "9":
                     continuar = false;
                     Console.WriteLine("Saliendo del sistema de gestión de pedidos.");
                     break;
