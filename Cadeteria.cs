@@ -63,17 +63,8 @@ namespace EspacioCadeteria
             return pagoPorPedido * CantidadDePedidosQueEntregoCadete(idCadete);
         }
 
-        public Pedido AsignarCadeteAPedido(string idCadete, string numPedido){
-            Cadete cadete = null;
-            Pedido pedido = BuscarPedidoPorNumero(numPedido);
-            if(pedido != null) 
-            {
-                cadete = BuscarCadetePorId(idCadete);
-                if(cadete != null) pedido.Cadete = cadete;
-                else return null;
-            }
-            else return null;
-            return pedido;
+        public void AsignarCadeteAPedido(Cadete cadete, Pedido pedido){
+            pedido.Cadete = cadete;
         }
         
         public Pedido BuscarPedidoPorEstado(List <Pedido> pedido, Estado estado){
@@ -133,18 +124,22 @@ namespace EspacioCadeteria
             {
                 case 1:
                     CambioDeEstadoDePedido(pedido, Estado.Entregado);
+                    Console.WriteLine("El estado del pedido ha sido cambiado a 'Entregado'.");
                     continuar = false;
                     break;
                 case 2:
                     CambioDeEstadoDePedido(pedido, Estado.Enviado);
+                    Console.WriteLine("El estado del pedido ha sido cambiado a 'Enviado'.");
                     continuar = false;
                     break;
                 case 3:
                     CambioDeEstadoDePedido(pedido, Estado.Rechazado);
+                    Console.WriteLine("El estado del pedido ha sido cambiado a 'Rechazado'.");
                     continuar = false;
                     break;
                 case 4:
                     CambioDeEstadoDePedido(pedido, Estado.Pendiente);
+                    Console.WriteLine("El estado del pedido ha sido cambiado a 'Pendiente'.");
                     continuar = false;
                     break;
                 case 5:
@@ -157,6 +152,11 @@ namespace EspacioCadeteria
             }
         } while (continuar);          
     }
+
+    public void ReasignarPedidoAOtroCadete(Pedido pedido, Cadete cadeteNuevo){
+        pedido.Cadete = cadeteNuevo;
+    }
+
 
 //   public List<Cadete> ReasignaPedidoAOtroCadete(Pedido pedido, List<Cadete> cadetes)
 //   {

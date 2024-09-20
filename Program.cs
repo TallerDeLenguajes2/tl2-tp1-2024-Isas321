@@ -38,7 +38,7 @@ class Program
 
                     System.Console.Write("Ingrese numero de pedido: ");
                     string numeroPedido = Console.ReadLine();
-                    
+
                     System.Console.Write("Nombre del cliente: ");
                     string nombre = Console.ReadLine();
 
@@ -76,28 +76,8 @@ class Program
                         System.Console.WriteLine("Pedido no encontrado");
                         break;
                     }
-
-
-                    // Pedido pedidoParaCambiarEstado = null;
-                    // bool encontrado = false;
-
-                    // foreach (var cadete in cadetes)
-                    // {
-                    //     pedidoParaCambiarEstado = BuscarPedidoPorNumero(numPedido, cadete.Pedidos);
-
-                    //     if (pedidoParaCambiarEstado != null)
-                    //     {
-                    //         encontrado = true;
-                    //         cadeteria.cambioDeEstadoDePedido(pedidoParaCambiarEstado);
-                            
-                    //         break;
-                    //     }
-                    // }
-                    // if(!encontrado){
-                    //     System.Console.WriteLine("\nNo se encontro el pedido con ese numero.");
-                    // } else{
-                    //     System.Console.WriteLine("\nCambio de estado exitoso.");
-                    // }
+                    
+                    cadeteria.MenuCambioDeEstadoDePedido(pedidoBuscado);
 
                     break;
                 case "4":
