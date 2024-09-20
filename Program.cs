@@ -52,34 +52,18 @@ class Program
                             Estado.Pendiente,
                             null );
 
-                    cadeteria.CargarPedidoAListaDePedidos(cadeteria.Pedidos, pedido);      
+                    cadeteria.CargarPedidoAListaDePedidos(pedido);      
 
                     break;
                 case "2":
-                    // Console.WriteLine("\nAsignar pedidos a cadetes");
+                    Console.WriteLine("\nAsignar pedidos a cadetes");
 
-                    // System.Console.Write("\nIngrese numero de pedido: ");
-                    // numPedido = Console.ReadLine();
-
-                    // var pedidoBuscado = BuscarPedidoPorNumero(numPedido, pedidosPendientes);
-                    // if (cadetes.Count != 0)
-                    // {
-                    //     if (pedidoBuscado != null)
-                    //     {
-                    //         Cadete cadete = cadeteria.AsignarPedidoCadete(pedidoBuscado, cadetes);
-                    //         System.Console.WriteLine("El pedido fue asignado al cadete: " + cadete.Nombre);
-                    //         pedidosPendientes.Remove(pedidoBuscado);
-                    //     }
-                    //     else
-                    //     {
-                    //         System.Console.WriteLine("No se encontro el pedido.");
-                    //     }
-                    // }
-                    // else
-                    // {
-                    //     System.Console.WriteLine("\nNo hay cadetes disponibles.");
-                    // }
-                    // break;
+                    System.Console.Write("\nIngrese numero de pedido: ");
+                    numPedido = Console.ReadLine();
+                    System.Console.Write("\nIngrese id del cadete que se hara cargo: ");
+                    string idCadete = Console.ReadLine();
+                    cadeteria.AsignarCadeteAPedido(idCadete, numPedido);
+                    break;
                 case "3":
                     // Console.WriteLine("Cambiar estado de un pedido");
 
