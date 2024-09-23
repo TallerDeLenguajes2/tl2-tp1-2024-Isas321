@@ -53,11 +53,7 @@ namespace EspacioCadeteria
             }
         }
 
-        public double promedio(int sumaTotal, int cantElementos){
-            return (double)sumaTotal/cantElementos;
-        }
-
-        
+        public double promedio(int sumaTotal, int cantElementos) => (double)sumaTotal/cantElementos; // función con un método de cuerpo de expresión.      
 
         public Cadete BuscarCadetePorId(string Id){
             Cadete cadete = cadetes.Find(cadete => cadete.Id == Id);
@@ -66,9 +62,7 @@ namespace EspacioCadeteria
             else return null;
         }
 
-        public int CantidadDePedidosQueEntregoCadete(string idCadete){
-            return pedidos.Count(pedido => pedido.Cadete.Id==idCadete);
-        }
+        public int CantidadDePedidosQueEntregoCadete(string idCadete) => pedidos.Count(pedido => pedido.Cadete.Id==idCadete);
 
         public Pedido BuscarPedidoPorNumero(string num){
             Pedido pedido = pedidos.Find(pedido => pedido.NumeroPedido == num);
@@ -82,9 +76,7 @@ namespace EspacioCadeteria
             return pagoPorPedido * CantidadDePedidosQueEntregoCadete(idCadete);
         }
 
-        public void AsignarCadeteAPedido(Cadete cadete, Pedido pedido){
-            pedido.Cadete = cadete;
-        }
+        public void AsignarCadeteAPedido(Cadete cadete, Pedido pedido) => pedido.Cadete = cadete;
         
         public Pedido BuscarPedidoPorEstado(List <Pedido> pedido, Estado estado){
             Pedido pedidoBuscado = pedidos.Find(pedido => pedido.EstadoPedido == estado);
@@ -120,11 +112,8 @@ namespace EspacioCadeteria
             }
         }
 
-        public void CambioDeEstadoDePedido(Pedido pedido, Estado nuevoEstado)
-        {
-            pedido.EstadoPedido = nuevoEstado;
-        }
-
+        public void CambioDeEstadoDePedido(Pedido pedido, Estado nuevoEstado) => pedido.EstadoPedido = nuevoEstado;
+        //función con un método de cuerpo de expresión.
         public void MenuCambioDeEstadoDePedido(Pedido pedido){
         bool continuar = true;
         do
@@ -172,11 +161,7 @@ namespace EspacioCadeteria
         } while (continuar);          
     }
 
-    public void ReasignarPedidoAOtroCadete(Pedido pedido, Cadete cadeteNuevo){
-        pedido.Cadete = cadeteNuevo;
-    }
-
-
-
+    public void ReasignarPedidoAOtroCadete(Pedido pedido, Cadete cadeteNuevo) => pedido.Cadete = cadeteNuevo;
+    
   }
 }

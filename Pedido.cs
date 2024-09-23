@@ -37,21 +37,14 @@ namespace EspacioCadeteria
       System.Console.WriteLine($"Observacion: {Observaciones}");
       System.Console.WriteLine($"Nombre: {Cliente.Nombre}");
       System.Console.WriteLine($"Estado: {EstadoPedido}");
-      if (Cadete != null)
-      {
-          System.Console.WriteLine($"Cadete: {Cadete.Nombre}");
-      }
-      else
-      {
-          System.Console.WriteLine("Cadete: No asignado");
-      }
+
+      if (Cadete != null) System.Console.WriteLine($"Cadete: {Cadete.Nombre}");
+      else System.Console.WriteLine("Cadete: No asignado");
     }
 
-    public void VerDireccionCliente()
-    {
-      Console.WriteLine($"La direccion del cliente es: {Cliente.Direccion}");
-    }
-
+    public void VerDireccionCliente() => Console.WriteLine($"La direccion del cliente es: {Cliente.Direccion}");
+    // función con un método de cuerpo de expresión. Por eso es una sola linea
+    
     public void VerDatosCliente()
     {
       Console.WriteLine("\nDatos del cliente: ");
