@@ -32,8 +32,7 @@ namespace EspacioCadeteria
     public Cadete Cadete {get => cadete; set => cadete = value; }
 
     public void MostrarPedido(){
-      System.Console.WriteLine("\nDatos del pedido: ");
-      System.Console.WriteLine($"Numero: {NumeroPedido}");
+      System.Console.WriteLine($"Pedido numero: {NumeroPedido}");
       System.Console.WriteLine($"Observacion: {Observaciones}");
       System.Console.WriteLine($"Nombre: {Cliente.Nombre}");
       System.Console.WriteLine($"Estado: {EstadoPedido}");
