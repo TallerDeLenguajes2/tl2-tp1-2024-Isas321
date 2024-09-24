@@ -84,21 +84,11 @@ namespace EspacioCadeteria
             else return null;
         }
 
-        
-        // public Cadete CadeteConMenosPedidos(List<Cadete> Cadetes)
-        // {
-        //     Cadete cadeteConMenosPedidos = Cadetes.MinBy(cadete => cadete.Pedidos.Count);
-        //     if (cadeteConMenosPedidos != null)
-        //     {
-        //         Console.WriteLine($"El cadete con menos pedidos es {cadeteConMenosPedidos.Nombre} con {cadeteConMenosPedidos.Pedidos.Count} pedidos.");
-        //     }
-        //     else
-        //     {
-        //         Console.WriteLine("No hay cadetes disponibles.");
-        //     }
-        //     return cadeteConMenosPedidos;
-        // }
-        
+        public Cadete CadeteConMenosPedidos(){
+            var cadeteConMasPedidos = Pedidos.GroupBy(p=>p.Cadete).OrderBy(g => g.Count()).FirstOrDefault();
+            return cadeteConMasPedidos.Key;
+        }
+
 
     
         public void MostrarCadeteria(){
