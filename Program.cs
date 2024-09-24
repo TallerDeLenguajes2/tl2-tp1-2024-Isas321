@@ -63,17 +63,27 @@ class Program
                     Console.Write("\nIngrese numero de pedido: ");
                     numPedido = Console.ReadLine();
                     pedido = cadeteria.BuscarPedidoPorNumero(numPedido);
-                    if(pedido == null) {
-                        Console.WriteLine("Numero de pedido incorrecto");
-                    } else{
-                        Console.Write("Ingrese id del cadete que se hara cargo: ");
-                        string idCadete = Console.ReadLine();
-                        Cadete cadete = cadeteria.BuscarCadetePorId(idCadete);
-                        if(cadete == null){
-                            Console.WriteLine("ID de cadete no encontrado");
-                        } else{
-                            cadeteria.AsignarCadeteAPedido(cadete, pedido);
+                    if(pedido == null)
+                        Console.WriteLine("Numero de pedido incorrecto"); 
+                    else
+                    {
+                        Console.Write("Desea asignarle el pedido al cadete con menos pedidos? SI = s / NO = n : ");
+                        ConsoleKeyInfo keyInfo = Console.ReadKey(); // Captura la tecla presionada
+                        Console.WriteLine(); // Para hacer un salto de línea después de leer la tecla
+                        if(keyInfo.Key == ConsoleKey.S){
+                            cadeteria.AsignarCadeteAPedido(cadeteria.CadeteConMenosPedidos(), pedido);
                             Console.WriteLine($"\nEl pedido fue asignado a {pedido.Cadete.Nombre} con exito.");
+                        }
+                        else{
+                            Console.Write("Ingrese id del cadete que se hara cargo: ");
+                            string idCadete = Console.ReadLine();
+                            Cadete cadete = cadeteria.BuscarCadetePorId(idCadete);
+                            if(cadete == null){
+                                Console.WriteLine("ID de cadete no encontrado");
+                            } else{
+                                cadeteria.AsignarCadeteAPedido(cadete, pedido);
+                                Console.WriteLine($"\nEl pedido fue asignado a {pedido.Cadete.Nombre} con exito.");
+                            }
                         }
                     }
 
