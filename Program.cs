@@ -13,6 +13,7 @@ class Program
         cadeteria.MostrarCadeteria();
 
         string numPedido = ""; 
+        string idCadete;
         
         bool continuar = true;
 
@@ -27,7 +28,8 @@ class Program
             Console.WriteLine("6. Mostrar todos los pedidos");
             Console.WriteLine("7. Mostrar todos los cadetes");
             Console.WriteLine("8. Mostrar informe de pedidos");
-            Console.WriteLine("9. Salir");
+            Console.WriteLine("9. Jornal a cobrar del cadete buscado por ID");
+            Console.WriteLine("10. Salir");
             Console.Write("Seleccione una opción: ");
 
             string opcion = Console.ReadLine();
@@ -37,10 +39,10 @@ class Program
                 case "1":
                     Console.WriteLine("\n\nDar de alta pedidos");
 
-                    System.Console.Write("\nIngrese numero de pedido: ");
+                    Console.Write("\nIngrese numero de pedido: ");
                     string numeroPedido = Console.ReadLine();
 
-                    System.Console.Write("Nombre del cliente: ");
+                    Console.Write("Nombre del cliente: ");
                     string nombre = Console.ReadLine();
 
                     var pedido = cadeteria.DarDeAltaPedido(              
@@ -66,23 +68,28 @@ class Program
                     if(pedido == null)
                         Console.WriteLine("Numero de pedido incorrecto"); 
                     else
-                    {
-                        Console.Write("Desea asignarle el pedido al cadete con menos pedidos? SI = s / NO = n : ");
-                        ConsoleKeyInfo keyInfo = Console.ReadKey(); // Captura la tecla presionada
-                        Console.WriteLine(); // Para hacer un salto de línea después de leer la tecla
-                        if(keyInfo.Key == ConsoleKey.S){
-                            cadeteria.AsignarCadeteAPedido(cadeteria.CadeteConMenosPedidos(), pedido);
-                            Console.WriteLine($"\nEl pedido fue asignado a {pedido.Cadete.Nombre} con exito.");
-                        }
-                        else{
-                            Console.Write("Ingrese id del cadete que se hara cargo: ");
-                            string idCadete = Console.ReadLine();
-                            Cadete cadete = cadeteria.BuscarCadetePorId(idCadete);
-                            if(cadete == null){
-                                Console.WriteLine("ID de cadete no encontrado");
-                            } else{
-                                cadeteria.AsignarCadeteAPedido(cadete, pedido);
+                    {   
+                        if(pedido.EstadoPedido==Estado.Entregado){
+                            Console.WriteLine("El pedido se encuentra entregado, no se puede asignar a un cadete para enviarlo.");
+                            Console.WriteLine("Cambie el estado del pedido o ingrese otro numero de pedido.");
+                        } else{
+                            Console.Write("Desea asignarle el pedido al cadete con menos pedidos? SI = s / NO = n : ");
+                            ConsoleKeyInfo keyInfo = Console.ReadKey(); // Captura la tecla presionada
+                            Console.WriteLine(); // Para hacer un salto de línea después de leer la tecla
+                            if(keyInfo.Key == ConsoleKey.S){
+                                cadeteria.AsignarCadeteAPedido(cadeteria.CadeteConMenosPedidos(), pedido);
                                 Console.WriteLine($"\nEl pedido fue asignado a {pedido.Cadete.Nombre} con exito.");
+                            }
+                            else{
+                                Console.Write("Ingrese id del cadete que se hara cargo: ");
+                                idCadete = Console.ReadLine();
+                                Cadete cadete = cadeteria.BuscarCadetePorId(idCadete);
+                                if(cadete == null){
+                                    Console.WriteLine("ID de cadete no encontrado");
+                                } else{
+                                    cadeteria.AsignarCadeteAPedido(cadete, pedido);
+                                    Console.WriteLine($"\nEl pedido fue asignado a {pedido.Cadete.Nombre} con exito.");
+                                }
                             }
                         }
                     }
@@ -100,12 +107,11 @@ class Program
                         Console.WriteLine("\n\nPedido no encontrado");
                     else                    
                         cadeteria.MenuCambioDeEstadoDePedido(pedidoBuscado);
-
                     break;
 
                 case "4":
                     Console.WriteLine("\n\nReasignar pedido a otro cadete");
-                    System.Console.Write("\nIngrese numero de pedido: ");
+                    Console.Write("\nIngrese numero de pedido: ");
                     numPedido = Console.ReadLine();
 
                     Pedido pedidoParaReasignar = cadeteria.BuscarPedidoPorNumero(numPedido);
@@ -127,8 +133,9 @@ class Program
                     break;
 
                 case "5":
-                    if(cadeteria.Pedidos.Count > 0){
-                        Console.WriteLine("\n\nPedidos pendientes");
+                    var pedidosPendientes = cadeteria.BuscarPedidosPorEstado(Estado.Pendiente);
+                    if(pedidosPendientes!=null && pedidosPendientes.Count > 0){
+                        Console.WriteLine("\n\nPedidos pendientes:");
                         cadeteria.MostrarTodosLosPedidos(cadeteria.TraerPedidosPorEstado(Estado.Pendiente));
                     } 
                     else 
@@ -162,6 +169,12 @@ class Program
                     break;
 
                 case "9":
+                    Console.Write("\n\nIngrese el ID del cadete para saber su jornal a cobrar: ");
+                    idCadete = Console.ReadLine();
+                    Console.WriteLine($"El jornal a cobrar es de: {cadeteria.JornalACobrar(idCadete)}");
+                    break;
+
+                case "10":
                     continuar = false;
                     Console.WriteLine("\n\nSaliendo del sistema de gestión de pedidos.");
                     break;
