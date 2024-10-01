@@ -62,7 +62,11 @@ namespace EspacioCadeteria
             else return null;
         }
 
-        public int CantidadDePedidosQueEntregoCadete(string idCadete) => pedidos.Count(pedido => pedido.Cadete.Id==idCadete);
+        public int CantidadDePedidosQueEntregoCadete(string idCadete) {
+        if (pedidos == null)
+            return 0;
+        return pedidos.Count(pedido => pedido.Cadete!=null && pedido.Cadete.Id==idCadete);
+        }
 
         public Pedido BuscarPedidoPorNumero(string num){
             Pedido pedido = pedidos.Find(pedido => pedido.NumeroPedido == num);
@@ -78,17 +82,17 @@ namespace EspacioCadeteria
 
         public void AsignarCadeteAPedido(Cadete cadete, Pedido pedido) => pedido.Cadete = cadete;
         
-        public Pedido BuscarPedidoPorEstado(List <Pedido> pedido, Estado estado){
-            Pedido pedidoBuscado = pedidos.Find(pedido => pedido.EstadoPedido == estado);
-            if(pedidoBuscado != null ) return pedidoBuscado;
-            else return null;
+        public List<Pedido> BuscarPedidosPorEstado(Estado estado){
+            if(pedidos == null) 
+                return null;
+            List <Pedido> pedidosBuscados = pedidos.Where(pedido => pedido.EstadoPedido == estado).ToList();
+            return pedidosBuscados.Count>0? pedidosBuscados : null;
         }
 
         public Cadete CadeteConMenosPedidos(){
             var cadeteConMasPedidos = Pedidos.GroupBy(p=>p.Cadete).OrderBy(g => g.Count()).FirstOrDefault();
             return cadeteConMasPedidos.Key;
         }
-
 
     
         public void MostrarCadeteria(){
@@ -104,6 +108,15 @@ namespace EspacioCadeteria
 
         public void CambioDeEstadoDePedido(Pedido pedido, Estado nuevoEstado) => pedido.EstadoPedido = nuevoEstado;
         //función con un método de cuerpo de expresión.
+
+        int ingresaEntero(){
+        int num;
+            if(int.TryParse(Console.ReadLine(), out num)){
+                return num;
+            } else{
+                return -999;
+            }
+        }
         public void MenuCambioDeEstadoDePedido(Pedido pedido){
         bool continuar = true;
         do
@@ -116,7 +129,7 @@ namespace EspacioCadeteria
             Console.WriteLine("5. Salir");
             Console.Write("Seleccione estado: ");
 
-            int opcion = Convert.ToInt32(Console.ReadLine());
+            int opcion = ingresaEntero();
 
             switch (opcion)
             {
@@ -152,6 +165,9 @@ namespace EspacioCadeteria
     }
 
     public void ReasignarPedidoAOtroCadete(Pedido pedido, Cadete cadeteNuevo) => pedido.Cadete = cadeteNuevo;
+
     
   }
+
+
 }
