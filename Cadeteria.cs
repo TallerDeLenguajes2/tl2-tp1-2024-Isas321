@@ -8,6 +8,7 @@ namespace EspacioCadeteria
         private string telefono;
         private List<Cadete> cadetes;
         private List <Pedido> pedidos; 
+        private int cantidadDePedidos;
 
         public Cadeteria(string nombre, string telefono, List<Cadete> cadetes, List<Pedido> pedidos)
         {
@@ -15,12 +16,14 @@ namespace EspacioCadeteria
             this.telefono = telefono;
             this.cadetes = cadetes;
             this.pedidos = pedidos;
+            this.cantidadDePedidos = 0;
         }
 
         public string Nombre { get => nombre; }
         public string Telefono { get => telefono; }
         public List<Cadete> Cadetes { get => cadetes; }
         public List<Pedido> Pedidos { get => pedidos; }
+        public int CantidadDePedidos { get => cantidadDePedidos; }
 
         public Pedido DarDeAltaPedido(string nro, string obs, string nombre_Cli, string direccion_Cli, string telefono_Cli, string datosRefDireccion_Cli, Estado estado, Cadete cadete)
         {
@@ -30,6 +33,7 @@ namespace EspacioCadeteria
 
         public void CargarPedidoAListaDePedidos(Pedido pedido){
             pedidos.Add(pedido);
+            cantidadDePedidos++;
         }
 
         public void MostrarTodosLosPedidos(List<Pedido> pedidos)
