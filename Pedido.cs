@@ -32,10 +32,10 @@ namespace EspacioCadeteria
     public Cadete Cadete {get => cadete; set => cadete = value; }
 
     public void MostrarPedido(){
-      System.Console.WriteLine($"Pedido numero: {NumeroPedido}");
-      System.Console.WriteLine($"Observacion: {Observaciones}");
-      System.Console.WriteLine($"Nombre: {Cliente.Nombre}");
-      System.Console.WriteLine($"Estado: {EstadoPedido}");
+      Console.WriteLine($"\nPedido numero: {NumeroPedido}");
+      Console.WriteLine($"Observacion: {Observaciones}");
+      Console.WriteLine($"Nombre: {Cliente.Nombre}");
+      Console.WriteLine($"Estado: {EstadoPedido}");
 
       if (Cadete != null) System.Console.WriteLine($"Cadete: {Cadete.Nombre}");
       else System.Console.WriteLine("Cadete: No asignado");
