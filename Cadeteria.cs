@@ -69,7 +69,7 @@ namespace EspacioCadeteria
         public int CantidadDePedidosQueEntregoCadete(string idCadete) {
         if (pedidos == null)
             return 0;
-        return pedidos.Count(pedido => pedido.Cadete!=null && pedido.Cadete.Id==idCadete);
+        return pedidos.Count(pedido => pedido.Cadete!=null && pedido.Cadete.Id==idCadete && pedido.EstadoPedido == Estado.Entregado);
         }
 
         public Pedido BuscarPedidoPorNumero(string num){
@@ -84,7 +84,16 @@ namespace EspacioCadeteria
             return pagoPorPedido * CantidadDePedidosQueEntregoCadete(idCadete);
         }
 
-        public void AsignarCadeteAPedido(Cadete cadete, Pedido pedido) => pedido.Cadete = cadete;
+        public void AsignarCadeteAPedido(Cadete cadete, Pedido pedido)
+        {
+            if (cadete == null || pedido == null)
+            {
+                Console.WriteLine("Error: No se pudo asignar el cadete. Cadete o pedido son nulos.");
+                return;
+            }
+
+            pedido.Cadete = cadete;
+        }
         
         public List<Pedido> BuscarPedidosPorEstado(Estado estado){
             if(pedidos == null) 
@@ -93,11 +102,25 @@ namespace EspacioCadeteria
             return pedidosBuscados.Count>0? pedidosBuscados : null;
         }
 
-        public Cadete CadeteConMenosPedidos(){
-            var cadeteConMasPedidos = Pedidos.GroupBy(p=>p.Cadete).OrderBy(g => g.Count()).FirstOrDefault();
-            return cadeteConMasPedidos.Key;
+        public List<Cadete> CadetesSinPedidos(){
+            return cadetes.Where(cadete=> !pedidos.Any(pedido => pedido.Cadete == cadete)).ToList();
         }
+        public Cadete CadeteConMenosPedidos()
+        {
+            if (Pedidos == null || Pedidos.Count == 0)
+                return null;
 
+            if(CadetesSinPedidos() !=null && CadetesSinPedidos().Count > 0){
+                return CadetesSinPedidos().First();
+            }
+
+            var cadeteConMenosPedidos = Pedidos.GroupBy(p => p.Cadete)
+                                            .Where(g => g.Key != null) // Filtra grupos donde el cadete no sea nulo
+                                            .OrderBy(g => g.Count())
+                                            .FirstOrDefault();
+
+            return cadeteConMenosPedidos.Key; 
+        }
     
         public void MostrarCadeteria(){
             System.Console.WriteLine("\n\nDatos de cadeteria:");
@@ -169,6 +192,22 @@ namespace EspacioCadeteria
     }
 
     public void ReasignarPedidoAOtroCadete(Pedido pedido, Cadete cadeteNuevo) => pedido.Cadete = cadeteNuevo;
+
+    public void MostrarCantidadDePedidosDeCadaCadete()
+    {
+        foreach (var cadete in Cadetes)
+        {
+            int cantidadDePedidos = 0;
+            foreach (var pedidox in Pedidos)
+            {
+                if (pedidox.Cadete != null && cadete.Id == pedidox.Cadete.Id)
+                {
+                    cantidadDePedidos++;
+                }
+            }
+            Console.WriteLine($"Cadete {cadete.Nombre} de id[{cadete.Id} se le asigno {cantidadDePedidos} pedidos]");
+        }
+    }
 
     
   }
