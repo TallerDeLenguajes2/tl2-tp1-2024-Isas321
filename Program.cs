@@ -61,34 +61,52 @@ class Program
 
                 case "2":
                     Console.WriteLine("\n\nAsignar pedidos a cadetes");
-
                     Console.Write("\nIngrese numero de pedido: ");
                     numPedido = Console.ReadLine();
                     pedido = cadeteria.BuscarPedidoPorNumero(numPedido);
-                    if(pedido == null)
+                    if (pedido == null)
+                    {
                         Console.WriteLine("Numero de pedido incorrecto"); 
+                    }
                     else
                     {   
-                        if(pedido.EstadoPedido==Estado.Entregado){
+                        if (pedido.EstadoPedido == Estado.Entregado)
+                        {
                             Console.WriteLine("El pedido se encuentra entregado, no se puede asignar a un cadete para enviarlo.");
                             Console.WriteLine("Cambie el estado del pedido o ingrese otro numero de pedido.");
-                        } else{
+                        }
+                        else
+                        {
                             Console.Write("Desea asignarle el pedido al cadete con menos pedidos? SI = s / NO = n : ");
-                            ConsoleKeyInfo keyInfo = Console.ReadKey(); // Captura la tecla presionada
-                            Console.WriteLine(); // Para hacer un salto de línea después de leer la tecla
-                            if(keyInfo.Key == ConsoleKey.S){
-                                cadeteria.AsignarCadeteAPedido(cadeteria.CadeteConMenosPedidos(), pedido);
-                                Console.WriteLine($"\nEl pedido fue asignado a {pedido.Cadete.Nombre} con exito.");
+                            ConsoleKeyInfo keyInfo = Console.ReadKey(); 
+                            Console.WriteLine(); 
+
+                            if (keyInfo.Key == ConsoleKey.S)
+                            {
+                                Cadete cadeteMenosPedidos = cadeteria.CadeteConMenosPedidos();
+                                if (cadeteMenosPedidos != null)
+                                {
+                                    cadeteria.AsignarCadeteAPedido(cadeteMenosPedidos, pedido);
+                                    Console.WriteLine($"\nEl pedido fue asignado a {pedido.Cadete.Nombre} con éxito.");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No se encontró un cadete disponible.");
+                                }
                             }
-                            else{
-                                Console.Write("Ingrese id del cadete que se hara cargo: ");
+                            else
+                            {
+                                Console.Write("Ingrese id del cadete que se hará cargo: ");
                                 idCadete = Console.ReadLine();
                                 Cadete cadete = cadeteria.BuscarCadetePorId(idCadete);
-                                if(cadete == null){
+                                if (cadete == null)
+                                {
                                     Console.WriteLine("ID de cadete no encontrado");
-                                } else{
+                                }
+                                else
+                                {
                                     cadeteria.AsignarCadeteAPedido(cadete, pedido);
-                                    Console.WriteLine($"\nEl pedido fue asignado a {pedido.Cadete.Nombre} con exito.");
+                                    Console.WriteLine($"\nEl pedido fue asignado a {pedido.Cadete.Nombre} con éxito.");
                                 }
                             }
                         }
@@ -161,11 +179,14 @@ class Program
                     break;
 
                 case "8":
-                    Console.WriteLine("\n\nCantidad promedio de envios por cadete.");
+                    Console.WriteLine("\n\nInforme");
                     int cantPedidosEntregados = cadeteria.TraerPedidosPorEstado(Estado.Entregado).Count;
-                    int cantidadCadetes =  cadeteria.Cadetes.Count;
+                    int cantidadCadetes = cadeteria.Cadetes.Count;
+                    Console.WriteLine($"Cantidad total de pedidos: {cadeteria.CantidadDePedidos}");
+                    if(cadeteria.CantidadDePedidos > 0) cadeteria.MostrarCantidadDePedidosDeCadaCadete();
                     double promedio = cadeteria.promedio(cantPedidosEntregados, cantidadCadetes);
                     Console.WriteLine($"Promedio de pedidos entregados: {promedio}");
+                    Console.WriteLine($"Total pagado a los cadetes {cantPedidosEntregados * 500}");
                     break;
 
                 case "9":
@@ -185,4 +206,6 @@ class Program
             }
         }
     }
+
+
 }
