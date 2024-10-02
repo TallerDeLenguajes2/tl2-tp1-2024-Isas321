@@ -21,10 +21,10 @@ namespace EspacioCadeteria
     public string Telefono { get => telefono; }
 
     public void MostrarCadete(){
-      System.Console.WriteLine("\n\tId: "+Id);
-      System.Console.WriteLine("\tNombre: "+Nombre);
-      System.Console.WriteLine("\tDireccion: "+Direccion);
-      System.Console.WriteLine("\tTelefono: "+Telefono);
+      Console.WriteLine("\n\tId: "+Id);
+      Console.WriteLine("\tNombre: "+Nombre);
+      Console.WriteLine("\tDireccion: "+Direccion);
+      Console.WriteLine("\tTelefono: "+Telefono);
     }
   }
 }
