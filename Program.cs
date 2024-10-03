@@ -7,10 +7,47 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.WriteLine("Seleccione el tipo de acceso a los datos: ");
+        Console.WriteLine("1. CSV");
+        Console.WriteLine("2. JSON");
 
-        Cadeteria cadeteria = ManejadorDeCsv.CreacionDeCadeteria();
+        string opcion1 = Console.ReadLine();
+        ManejadorDeArchivos manejadorDeArchivos;
 
-        cadeteria.MostrarCadeteria();
+            string rutaCadete = "";
+            string rutaCadeteria = "";
+
+        if (opcion1 == "1")
+        {
+            manejadorDeArchivos = new ManejadorDeCsv();
+            rutaCadete = "Cadetes.csv";
+            rutaCadeteria = "Cadeteria.csv";
+        }
+        else if (opcion1 == "2")
+        {
+            manejadorDeArchivos = new ManejadorDeJSON();
+            rutaCadete = "Cadetes.JSON";
+            rutaCadeteria = "Cadeteria.JSON";
+        }
+        else
+        {
+            Console.WriteLine("Opción no válida.");
+            return;
+        }
+
+        Cadeteria cadeteria = manejadorDeArchivos.CreacionDeCadeteria(rutaCadete, rutaCadeteria);
+
+        if (cadeteria != null)
+        {
+            Console.WriteLine("Datos cargados correctamente.");
+            cadeteria.MostrarCadeteria();
+        }
+        else
+        {
+            Console.WriteLine("Error al cargar los datos.");
+        }
+
+
 
         string numPedido = ""; 
         string idCadete;
