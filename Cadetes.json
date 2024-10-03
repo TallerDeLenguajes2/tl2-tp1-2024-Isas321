@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "nombre": "Juan Pérez",
+    "direccion": "Calle Falsa 123",
+    "telefono": "555-1234"
+  },
+  {
+    "id": "2",
+    "nombre": "María Gómez",
+    "direccion": "Calle Verdadera 456",
+    "telefono": "555-5678"
+  },
+  {
+    "id": "3",
+    "nombre": "Javier Rojas",
+    "direccion": "Calle Rondeau 679",
+    "telefono": "575-5117"
+  }
+]
