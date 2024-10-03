@@ -5,9 +5,9 @@ using System.IO;
 
 namespace EspacioCadeteria
 {
-    public class ManejadorDeCsv
+    public class ManejadorDeCsv : ManejadorDeArchivos
     {
-        public static List<Cadete> CargaDeCadetes(string rutaCadete)
+        public override List<Cadete> CargaDeCadetes(string rutaCadete)
         {
             List<Cadete> cadetes = new List<Cadete>();
             if (ExisteArchivo(rutaCadete))
@@ -49,7 +49,7 @@ namespace EspacioCadeteria
             return cadetes;
         }
 
-        public static Cadeteria CargaDeCadeteria(string rutaCadeteria, List<Cadete> cadetes)
+        public override Cadeteria CargaDeCadeteria(string rutaCadeteria, List<Cadete> cadetes)
         {
             if (cadetes == null || cadetes.Count == 0)
             {
@@ -99,17 +99,9 @@ namespace EspacioCadeteria
             return null;
         }
 
-        public static bool ExisteArchivo(string ruta)
+        public bool ExisteArchivo(string ruta)
         {
             return File.Exists(ruta);
-        }
-
-        public static Cadeteria CreacionDeCadeteria(){
-            string rutaCadete = "Cadetes.csv";
-            string rutaCadeteria = "Cadeteria.csv";
-            List<Cadete> cadetes = CargaDeCadetes(rutaCadete);
-            Cadeteria cadeteria = CargaDeCadeteria(rutaCadeteria, cadetes);
-            return cadeteria;
         }
     }
 }
