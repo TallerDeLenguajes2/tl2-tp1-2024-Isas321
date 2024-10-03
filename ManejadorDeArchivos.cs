@@ -4,9 +4,7 @@ namespace EspacioCadeteria{
     public abstract List<Cadete> CargaDeCadetes(string rutaCadete);
     public abstract Cadeteria CargaDeCadeteria(string rutaCadeteria, List<Cadete> cadetes);
 
-    public Cadeteria CreacionDeCadeteria(){
-      string rutaCadete = "Cadetes.csv";
-      string rutaCadeteria = "Cadeteria.csv";
+    public Cadeteria CreacionDeCadeteria(string rutaCadete, string rutaCadeteria){
       List<Cadete> cadetes = CargaDeCadetes(rutaCadete);
       Cadeteria cadeteria = CargaDeCadeteria(rutaCadeteria, cadetes);
       return cadeteria;
