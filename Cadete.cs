@@ -1,30 +1,34 @@
+
+using System;
+using System.Text.Json.Serialization;
+
 namespace EspacioCadeteria
 {
-  public class Cadete
-  {
-    private string id;
-    private string nombre;
-    private string direccion;
-    private string telefono;
-
-    public Cadete(string id, string nombre, string direccion, string telefono)
+    public class Cadete
     {
-        this.id = id;
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.telefono = telefono;
-    }
+        //Para usar los JsonPropertyName fue necesario poner las propiedades como publicas
+        [JsonPropertyName("id")]
+        public string Id { get; set; }  
+        [JsonPropertyName("nombre")]
+        public string Nombre { get; set; } 
+        [JsonPropertyName("direccion")]
+        public string Direccion { get; set; }  
+        [JsonPropertyName("telefono")]
+        public string Telefono { get; set; }  
+        public Cadete(string id, string nombre, string direccion, string telefono)
+        {
+            Id = id;
+            Nombre = nombre;
+            Direccion = direccion;
+            Telefono = telefono;
+        }
 
-    public string Id { get => id; }
-    public string Nombre { get => nombre; }
-    public string Direccion { get => direccion; }
-    public string Telefono { get => telefono; }
-
-    public void MostrarCadete(){
-      Console.WriteLine("\n\tId: "+Id);
-      Console.WriteLine("\tNombre: "+Nombre);
-      Console.WriteLine("\tDireccion: "+Direccion);
-      Console.WriteLine("\tTelefono: "+Telefono);
+        public void MostrarCadete()
+        {
+            Console.WriteLine($"\n\tId: {Id}");
+            Console.WriteLine($"\tNombre: {Nombre}");
+            Console.WriteLine($"\tDirección: {Direccion}");
+            Console.WriteLine($"\tTeléfono: {Telefono}");
+        }
     }
-  }
 }
