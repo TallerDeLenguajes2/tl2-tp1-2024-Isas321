@@ -12,11 +12,6 @@ namespace EspacioCadeteria
             {
                 string cadetesJson = File.ReadAllText(rutaCadete);
                 List<Cadete> cadetes = JsonSerializer.Deserialize<List<Cadete>>(cadetesJson);
-                foreach (var cadete in cadetes)
-                {
-                  Console.WriteLine("\nCadete cargado");
-                  cadete.MostrarCadete();
-                }
                 return cadetes ?? new List<Cadete>();  
             }
             catch (Exception ex)
