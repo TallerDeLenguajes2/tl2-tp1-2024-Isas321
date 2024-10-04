@@ -40,7 +40,8 @@ class Program
         if (cadeteria != null)
         {
             Console.WriteLine("Datos cargados correctamente.");
-            cadeteria.MostrarCadeteria();
+            Console.WriteLine(cadeteria.MostrarCadeteria());
+            Console.WriteLine(cadeteria.MostrarTodosLosCadetes());
         }
         else
         {
