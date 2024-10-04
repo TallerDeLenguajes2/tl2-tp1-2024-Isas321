@@ -50,11 +50,13 @@ namespace EspacioCadeteria
             return pedidosConEseEstado;
         }
 
-        public void MostrarTodosLosCadetes(){
+        public string MostrarTodosLosCadetes(){
+            string MostrarTodosLosCadetes = "";
             foreach (var cadete in cadetes)
             {
-                cadete.MostrarCadete();
+                MostrarTodosLosCadetes+=cadete.MostrarCadete();
             }
+            return MostrarTodosLosCadetes;
         }
 
         public double promedio(int sumaTotal, int cantElementos) => (double)sumaTotal/cantElementos; // función con un método de cuerpo de expresión.      
