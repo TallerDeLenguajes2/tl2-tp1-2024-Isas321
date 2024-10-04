@@ -122,15 +122,8 @@ namespace EspacioCadeteria
             return cadeteConMenosPedidos.Key; 
         }
     
-        public void MostrarCadeteria(){
-            System.Console.WriteLine("\n\nDatos de cadeteria:");
-            System.Console.WriteLine("Nombre: "+Nombre);
-            System.Console.WriteLine("Telefono: "+telefono);
-            System.Console.WriteLine("Lista de cadetes: ");
-            foreach (var cadete in cadetes)
-            {
-                cadete.MostrarCadete();
-            }
+        public string MostrarCadeteria(){
+            return $"\n\nDatos de cadeteria: \nNombre: {Nombre} \nTelefono: {Telefono}";
         }
 
         public void CambioDeEstadoDePedido(Pedido pedido, Estado nuevoEstado) => pedido.EstadoPedido = nuevoEstado;
@@ -207,10 +200,6 @@ namespace EspacioCadeteria
             }
             Console.WriteLine($"Cadete {cadete.Nombre} de id[{cadete.Id} se le asigno {cantidadDePedidos} pedidos]");
         }
-    }
-
-    
+    }    
   }
-
-
 }
