@@ -23,12 +23,9 @@ namespace EspacioCadeteria
             Telefono = telefono;
         }
 
-        public void MostrarCadete()
+        public string MostrarCadete()
         {
-            Console.WriteLine($"\n\tId: {Id}");
-            Console.WriteLine($"\tNombre: {Nombre}");
-            Console.WriteLine($"\tDirección: {Direccion}");
-            Console.WriteLine($"\tTeléfono: {Telefono}");
+            return $"\n\tId: {Id}\n\tNombre: {Nombre}\n\tDirección: {Direccion}\n\tTeléfono: {Telefono}";
         }
     }
 }
